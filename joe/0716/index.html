@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<p align="center">鼠标移入移出方块查看效果</p>
+<div class="one" id="test" onmouseover="fun1()" onmouseout="fun2()">
+    鼠标移入移出方块查看效果
+</div>
+<style type="text/css">
+    .one{
+        color: #fffef7;
+        width:200px;
+        height: 200px;
+        background-color: #000000;
+        border: 2px  solid #0099cd;
+        margin-left: 42%;
+        padding:20px 20px;
+    }
+    .two{
+        width:200px;
+        height: 200px;
+        border: 20px solid #61ff2c;
+        background-color: red;
+        margin-left: 42%;
+        padding:2px 2px;
+    }
+</style>
+
+<script>
+    function fun1(){
+        var obj=document.getElementById("test");
+        obj.setAttribute('class',"two")
+    }
+    function fun2() {
+        var obj=document.getElementById("test");
+        obj.setAttribute('class','one')
+    }
+</script>
+</body>
+</html>
