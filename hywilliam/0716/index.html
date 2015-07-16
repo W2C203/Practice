@@ -28,7 +28,8 @@
     window.onload = function () {
         var showCase = document.getElementById('div1');
         function changeStyle() {
-            var a
+            var attr = this.getAttribute('class');
+            return attr.replace('green', 'red');
         }
         showCase.addEventListener('mouseover', changeStyle, true);
     }
