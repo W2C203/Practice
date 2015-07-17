@@ -1,7 +1,7 @@
 # Practice
 EveryDay Coding Practice
 
-## [Site](http://W2C.github.io/Practice)
+## [Site](http://w2c203.github.io/Practice)
 
 ## Content Info
 
