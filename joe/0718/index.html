@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<pre>
+    function myisArray(arr) {   // 要求的函数
+        return arr.constructor == Array;
+    }
+    //理解constructor!!!  constructor 属性返回对创建此对象的数组函数的引用
+    function newarray(){
+        return new Array(4);
+    }
+    function newint(){
+        return 10;
+    }
+    var aaa= new newarray();
+    alert(aaa.constructor); // function Array() { [native code] }
+
+    var bbb= new newint();
+    alert(bbb.constructor); //  function newint(){ return 10; }
+</pre>
+</body>
+</html>
