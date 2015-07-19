@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>乱序算法</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <link rel="stylesheet" href="../../stylesheets/stylesheet.css"/>
+</head>
+<body>
+    <pre>
+        Array.prototype.shuffle = function () {
+            var len = this.length,
+                i,
+                temp;
+            while(len) {
+                i = Math.floor(Math.random()*len--);
+                //  随机取得一个位置并与最末尾的值进行互换，标记为已打乱，len-1
+                temp = this[len];
+                this[len] = this[i];
+                this[i] = temp;
+            }
+            return this;
+        };
+    </pre>
+    <script>
+        Array.prototype.shuffle = function () {
+            var len = this.length,
+                i,
+                temp;
+            while(len) {
+                i = Math.floor(Math.random()*len--);
+                //  随机取得一个位置并与最末尾的值进行互换，标记为已打乱，len-1
+                temp = this[len];
+                this[len] = this[i];
+                this[i] = temp;
+            }
+            return this;
+        };
+        console.log([1,2,3,4,5,6,7,8,9,10].shuffle());
+    </script>
+</body>
+</html>
