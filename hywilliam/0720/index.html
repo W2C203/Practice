@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>0720</title>
+</head>
+
+<body>
+<ul id="test">
+  <li>first</li>
+  <li>second</li>
+  <li>third</li>
+  <li>forth</li>
+</ul>
+<pre>
+         window.onload = function () {
+            (function () {
+                // 独立作用域，不污染全局环境
+                var list = document.getElementById('test').getElementsByTagName('li');
+                var i = 0,
+                    len = list.length;
+                for (; i < len; i++) {
+                    // 闭包渗透
+                    list[i].onclick = (function (index) {
+                        return function () {
+                            alert('I am the ' + index + ' list.');
+                        }
+                    })(i + 1);
+                }
+            })();
+        }
+</pre>
+<script>
+  window.onload = function () {
+    (function () {
+      // 独立作用域，不污染全局环境
+      var list = document.getElementById('test').getElementsByTagName('li');
+      var i = 0,
+          len = list.length;
+      for (; i < len; i++) {
+        // 闭包渗透
+        list[i].onclick = (function (index) {
+          return function () {
+            alert('I am the ' + index + ' list.');
+          }
+        })(i + 1);
+      }
+    })();
+  }
+</script>
+</body>
+
+</html>
