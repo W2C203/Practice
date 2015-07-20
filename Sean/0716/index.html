@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>鼠标移入移出改变样式</title>
+    <!--<script type="text/css">-->
+        <!--div {background-color:gray;border:10px solid red;color:red;width:200px;height:200px;padding:10px;}-->
+        <!--.outcss {background-color:gray;border:10px solid red;color:red;width:200px;height:200px;padding:10px;}-->
+        <!--.overcss {background-color:#000000;border:none;color:white;width:200px;height:200px;padding:10px;}-->
+    <!--</script>-->
+    <script type="text/javascript">
+                function funcover(obj){
+                    obj.style.backgroundColor = "#000000";
+                    obj.style.color = "white";
+                    obj.style.border = "none";
+                }
+                function funcout(obj){
+                    obj.style.backgroundColor = "gray";
+                    obj.style.color = "red";
+                    obj.style.border = "10px solid red";
+                }
+//        var mdiv = document.getElementsByTagName("div");
+//        mdiv[0].onmouseover = function(){
+//            this.style.backgroundColor = "#000000";
+//            this.style.color = "white";
+//            this.style.border = "none";
+//        };
+//        mdiv[0].onmouseout = function(){
+//            this.style.backgroundColor = "gray";
+//            this.style.color = "red";
+//            this.style.border = "10px solid red";
+//        };
+//        mdiv.addEventListener('mouseover',funcover,false);
+//        mdiv.addEventListener('mouseout',funcout,false);
+    </script>
+</head>
+<body>
+    <!-- 盒子 -->
+    <div id="div"
+         style="background-color:gray;border:10px solid red;color:red;width:200px;height:200px;padding:10px;"
+         onmouseover="funcover(this)" onmouseout="funcout(this)">
+        <div>鼠标移入改变样式，鼠标移出恢复。</div>
+    </div>
+</body>
+</html>
