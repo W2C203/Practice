@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <link rel="stylesheet" href="../../stylesheets/stylesheet.css"/>
+    <style>
+        .area {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+
+        .green {
+            background: #006400;
+            color: #FFF;
+        }
+
+        .red {
+            background: #FFF;
+            color: #FF0000;
+            border: 3px dotted #FF0000;
+        }
+    </style>
+</head>
+<body>
+<div class="area green" id="div1"><p>鼠标移入改变样式，鼠标移出恢复。(本实例只支持IE8+)</p></div>
+<pre>
+     window.onload = function () {
+        // 获取要处理的div
+        var showCase = document.getElementById('div1');
+
+        // 工具事件回调函数：修改当前元素的class类
+        function changeStyle() {
+            var attr = this.className,
+                re = /green|red/,
+                newStyle = attr.replace(re, function(str) {
+                    return str === 'green' ? 'red' : 'green';
+                });
+            this.className = newStyle;
+        }
+        // 事件监听的封装
+        function doWhat() {
+            if(arguments.length == 0) {
+                return Error;
+            } else {
+                for (var motion in arguments) {
+                    if(this.addEventListener) {
+                        this.addEventListener(arguments[motion], changeStyle);
+                    }else if (this.attachEvent) {
+                        this.attachEvent('on' + arguments[motion], changeStyle);
+                    }
+                    else {
+                        return Error;
+                    }
+                }
+            }
+        }
+
+        // 目标事件处理
+        doWhat.call(showCase, 'mouseover', 'mouseout');
+    }
+</pre>
+<script>
+    window.onload = function () {
+        // 获取要处理的div
+        var showCase = document.getElementById('div1');
+
+        // 工具事件回调函数：修改当前元素的class类
+        function changeStyle() {
+            var attr = this.className,
+                    re = /green|red/,
+                    newStyle = attr.replace(re, function (str) {
+                        return str === 'green' ? 'red' : 'green';
+                    });
+            this.className = newStyle;
+        }
+
+        // 事件监听的封装
+        function doWhat() {
+            if (arguments.length == 0) {
+                return Error;
+            } else {
+                for (var motion in arguments) {
+                    if (this.addEventListener) {
+                        this.addEventListener(arguments[motion], changeStyle);
+                    } else if (this.attachEvent) {
+                        this.attachEvent('on' + arguments[motion], changeStyle);
+                    }
+                    else {
+                        return Error;
+                    }
+                }
+            }
+        }
+
+        // 目标事件处理
+        doWhat.call(showCase, 'mouseover', 'mouseout');
+    }
+</script>
+</body>
+</html>

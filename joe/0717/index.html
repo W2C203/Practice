@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <pre>
+    function cuturl(url){
+        var re = {};              //存返回值
+        url = url.split("?")[1];  //取得？后面的字符串
+        var get_thing = url.split("&");
+        for(var i = 0; i < get_thing.length ; i++){
+            var temp = get_thing[i].split("=");
+            re[temp[0]] = temp[1];
+        }
+        return JSON.stringify(re);
+    }
+    var url="http://item.taobao.com/item.htm?a=1&b=2&c=&d=xxx&e";
+    document.write("url:" + url + "   " + cuturl(url));
+    </pre>
+</body>
+<script>
+    function cuturl(url){/*写一段JS程序提取URL中的各个GET参数(参数名和参数个数不确定)，将其按key-value形式
+                          返回到一个json结构中  如{a:'1', b:'2', c:'', d:'xxx', e:undefined}*/
+        var re = {};              //存返回值
+        url = url.split("?")[1];  //取得？后面的字符串
+        var get_thing = url.split("&");
+        for(var i = 0; i < get_thing.length ; i++){
+            var temp = get_thing[i].split("=");
+            re[temp[0]] = temp[1];
+        }
+        return JSON.stringify(re);
+    }
+    var url="http://item.taobao.com/item.htm?a=1&b=2&c=&d=xxx&e";
+    document.write("运行：原url:" + url + "<br><br> 结果：" + cuturl(url));
+</script>
+</html>
+
