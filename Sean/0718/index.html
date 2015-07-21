@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <pre>
+        typeof maybeArray == "Array"; // erm, are you kidding?
+
+        maybeArray instanceof Array; // maybe
+
+        maybeArray.constructor == Array; // maybe
+
+        typeof maybeArray.sort == 'function'; // closer
+
+        Object.prototype.toString.call(maybeArray) === '[object Array]'; // ding ding ding
+        ------------------------------------------------------------------------------------
+        //the simple way
+        function isArray(o) {
+            return Object.prototype.toString.call(o) === '[object Array]';
+        }
+        //the right way :Array.isArray()
+        function IsArray(obj) {
+            var flag = Array.isArray(obj) || function (obj) {
+                return Object.prototype.toString.call(obj) === '[object Array]';
+            }
+        }
+    </pre>
+    <script type="text/javascript">
+        function IsArray(obj) {
+            var flag = Array.isArray(obj) || function (obj) {
+                return typeof obj ==='object' && Object.prototype.toString.call(obj) === '[object Array]';
+            }
+            return flag;
+        }
+        console.log(IsArray([1,2,3]));
+    </script>
+</body>
+</html>

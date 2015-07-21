@@ -9,6 +9,6 @@ function handleurl(url) {
 	}
     return obj;
 }
-url = "http://item.taobao.com/item.htm?a=1&b=2&c=&d=xxx&e";
-obj = handleurl(url);
+//url = "http://item.taobao.com/item.htm?a=1&b=2&c=&d=xxx&e";
+//obj = handleurl(url);
 //console.log(obj);//{ a: '1', b: '2', c: '', d: 'xxx', e: undefined }
