@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<pre>
+    Array.prototype.shuffle = function(){    // 直接写到Array.prototype 成为任何Array对象的方法 方便重用
+        var i= 0, len=this.length, j, k, temp;
+        for(; i < len ;i++){
+            j = Math.floor(Math.random()*len);  // 随机均衡地产生0～len-1 用于交换 以打乱次序
+            k = Math.floor(Math.random()*len);
+            temp = this[j]; this[j]=this[k]; this[k]=temp;
+            //this[j]^=this[k];this[k]^=this[j];this[j]^=this[k];  //这样交换有问题！！ 当两数相等时 都会变0 是编码问题？
+        }
+        return this;
+    }
+    alert([1,2,3,4,5,6,7,8,9,10].shuffle());
+</pre>
+</body>
+<script>
+    Array.prototype.shuffle = function(){    // 直接写到Array.prototype 成为任何Array对象的方法 方便重用
+        var i= 0, len=this.length, j, k, temp;
+        for(; i < len ;i++){
+            j = Math.floor(Math.random()*len);  // 随机均衡地产生0～len-1 用于交换 以打乱次序
+            k = Math.floor(Math.random()*len);
+            temp = this[j]; this[j]=this[k]; this[k]=temp;
+            //this[j]^=this[k];this[k]^=this[j];this[j]^=this[k];  //这样交换有问题！！ 当两数相等时 都会变0 是编码问题？
+        }
+        return this;
+    }
+    alert([1,2,3,4,5,6,7,8,9,10].shuffle());
+</script>
+</html>
