@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>0721</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+</head>
+<body>
+<pre>
+    function escapeHtml(str) {
+        return str.replace(/[<>”&]/g, function(match) {
+            switch (match) {
+                case “<”:
+                    // HTML会解析出实体，看源码
+                    return “&lt;”;
+                case “>”:
+                    return “&gt;”;
+                case “&”:
+                    return “&amp;”;
+                case “\””: //习惯双引号的话就需要转义，单引号的话就不用了
+                    return “&quot;”;
+       }
+   });
+ }
+</pre>
+<script>
+    function escapeHtml(str) {
+        return str.replace(/[<>"&]/g, function (match) {
+            switch (match) {
+                case '<':
+                    return '&lt;';
+                case '>':
+                    return '&gt;';
+                case '&':
+                    return '&amp;';
+                case '"':
+                    return '&quot;';
+            }
+        })
+    }
+
+    var test = '<script>&"';
+    console.log(escapeHtml(test));
+</script>
+</body>
+</html>
