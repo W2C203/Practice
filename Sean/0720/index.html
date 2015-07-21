@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>点击列表显示当前索引</title>
+    <script type="text/javascript">
+        window.onload = function(){
+            var ul = document.getElementsByTagName("ul")[0];
+            var li = ul.getElementsByTagName("li");
+            for(var i = 0;i < li.length;i++){
+                li[i].onclick = (function(index){
+                    return function(){
+                        alert("index of <li> : " + index);
+                    };
+                })(i);
+            }
+        }
+    </script>
+</head>
+<body>
+    <ul>
+        <li>one</li>
+        <li>two</li>
+        <li>three</li>
+    </ul>
+    <pre>
+        window.onload = function(){
+            var ul = document.getElementsByTagName("ul")[0];
+            var li = ul.getElementsByTagName("li");
+            for(var i = 0;i < li.length;i++){
+                li[i].onclick = (function(index){
+                    return function(){
+                        alert("index of < li > : " + index);
+                    };
+                })(i);
+            }
+        }
+    </pre>
+</body>
+</html>
