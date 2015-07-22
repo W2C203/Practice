@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+name:<input id="new_name">score:<input id="new_score">
+<button id="add">添加学生</button>
+<button id="ave">计算平均分</button>
+<select id="select">
+    <option>按成绩升序</option>
+    <option>按成绩降序</option>
+</select>
+<button id="sort">排序</button>
+<button id="show">console显示全部信息</button>
+
+    <pre>
+    var classes=[
+        {"name":"Mike","score":90},
+        {"name":"Alien","score":99},
+        {"name":"John","score":70}
+    ];
+    function Student(name,score){
+            this.name=name;
+            this.score=score;
+    }
+    Array.prototype.Object_Array_Sort=function(key,Ascend){      //对  对象数组this 按照关键字key进行排序 Ascend为true表示升序 否则为降序
+            this.sort(function (a, b) {
+                if(Ascend)  return a[key]- b[key];   //升序
+                return b[key]- a[key];
+
+            });
+    }
+    Array.prototype.Object_Array_Average=function(key){     //对  对象数组this 返回 数组关键字key的均值
+            var i= 0,re=0.0;
+            for(i; i&lt this.length; i++){
+                re+=this[i][key];
+            }
+            re/=this.length;
+           return re.toFixed(2);
+    }
+    Array.prototype.Object_Array_add=function(obj){     //对  对象数组this 在列表最后插入对象obj
+              this[this.length]=obj;
+              alert(this.length);
+    }
+    Array.prototype.Object_Array_Show=function(){       // 对  对象数组this  在console中全部显示
+            console.log("对象数组：[");
+            var i= 0, j, string;
+            for(; i&lt this.length; i++){
+                string="      {"
+                for(j in this[i]){
+                    string+="  "+j+":"+this[i][j];
+                }
+                string+="  }"
+                console.log(string);
+            }
+            console.log("   ]");
+    }
+    </pre>
+</body>
+<script>
+    var classes = [
+        {"name": "Mike", "score": 90},
+        {"name": "Alien", "score": 99},
+        {"name": "John", "score": 70}
+    ];
+    function Student(name, score) {
+        this.name = name;
+        this.score = score;
+    }
+    Array.prototype.Object_Array_Sort = function (key, Ascend) {  //对  对象数组this 按照关键字key进行排序 Ascend为true表示升序 否则为降序
+        this.sort(function (a, b) {
+            if (Ascend)  return a[key] - b[key];   //升序
+            return b[key] - a[key];
+
+        });
+    }
+    Array.prototype.Object_Array_Average = function (key) {//对  对象数组this 返回 数组关键字key的均值
+        var i = 0, re = 0.0;
+        for (i; i < this.length; i++) {
+            re += this[i][key];
+        }
+        re /= this.length;
+        return re.toFixed(2);
+    }
+    Array.prototype.Object_Array_add = function (obj) {//对  对象数组this 在列表最后插入对象obj
+        this[this.length] = obj;
+        alert(this.length);
+    }
+    Array.prototype.Object_Array_Show = function () {  // 对  对象数组this  在console中全部显示
+        console.log("对象数组：[");
+        var i = 0, j, string;
+        for (; i < this.length; i++) {
+            string = "      {"
+            for (j in this[i]) {
+                string += "  " + j + ":" + this[i][j];
+            }
+            string += "  }"
+            console.log(string);
+        }
+        console.log("   ]");
+    }
+    window.onload = function () {
+        document.getElementById("add").onclick = function () {
+            var name = document.getElementById("new_name").value;
+            var score = parseInt(document.getElementById("new_score").value);
+            if (name == "" || score == "") return;
+            var new_student = new Student(name, score);
+            classes.Object_Array_add(new_student);
+        }
+        document.getElementById("ave").onclick = function () {
+            alert("平均分是：" + classes.Object_Array_Average("score"));
+        }
+        document.getElementById("sort").onclick = function () {
+            var pd = document.getElementById("select").value;
+            if (pd == "按成绩升序")
+                classes.Object_Array_Sort("score", true);
+            else classes.Object_Array_Sort("score", false);
+        }
+        document.getElementById("show").onclick = function () {
+            classes.Object_Array_Show();
+        }
+    }
+
+
+</script>
+</html>
