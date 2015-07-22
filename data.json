@@ -44,9 +44,9 @@
             "date": "0721"
         }
     ],
-    "person": [
-        "hywilliam",
-         "JoeLucky",
-          "SeanLee"
-    ]
+    "person": {
+        "name1":"hywilliam",
+        "name2":"JoeLucky",
+        "name3":"SeanLee"
+    }
 }
