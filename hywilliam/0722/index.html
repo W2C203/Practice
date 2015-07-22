@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+</head>
+<body>
+<script>
+    var students = [];
+    // Student构造函数
+    function Student(name, score) {
+        this.name = name;
+        this.score = score;
+    }
+    // 取出自己成绩的方法
+    Student.prototype.getScore = function () {
+        return this.score;
+    };
+
+    // 增加一名学生
+    function addStudent(name, score) {
+        var stu = new Student(name, score);
+        students.push(stu);
+    }
+
+    // 按学生成绩从高到底排序
+    function sortStudent(students) {
+        return students.sort(function (a, b) {
+            var x = a.getScore(),
+                y = b.getScore();
+            return x - y;
+        });
+    }
+
+    // 返回学生们的平均成绩
+    function avgScore(students) {
+        return students.reduce(function(a, b) {
+            return a + b.getScore();
+        },0)/students.length;
+    }
+</script>
+</body>
+</html>

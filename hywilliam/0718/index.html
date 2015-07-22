@@ -9,7 +9,7 @@
 <body>
 <pre>
     // 工具函数，检测一个未知对象是否为数组
-    var isArray = Function.isArray || function (obj) {
+    var isArray = Array.isArray || function (obj) {
         return typeof obj === 'object' &&
         Object.prototype.toString.call(obj) === '[object Array]';
     };
