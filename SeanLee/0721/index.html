@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>理解HTML实体</title>
+</head>
+<body>
+    <p>
+        在 HTML 中，某些字符是预留的。<br/>
+        在 HTML 中不能使用小于号（<）和大于号（>），这是因为浏览器会误认为它们是标签。<br/>
+        如果希望正确地显示预留字符，我们必须在 HTML 源代码中使用字符实体。<br/>
+        最常见的字符实体如空格，实体名称是[& nbsp];<br/>
+        注意：实体名称对大小写敏感<br/>
+    </p>
+    <pre>
+        function escaptHtml(str){
+            str = str.replace(/[<>&'"]/g,function(c){//使用正则匹配
+                switch (c){
+                    case "<" : return "&lt";//&#60
+                    case ">" : return "&gt";//&#62
+                    case "&" : return "&amp";//&#38
+                    case "'" : return "&apos";//IE不支持,&#39
+                    case "\"" : return "&quot";//&#34
+                }
+            })
+            return str;
+        }
+        var teststr = '1<3>2&&true';
+        console.log(escaptHtml(teststr));// 1&lt3&gt2&amp&amptrue
+    </pre>
+    <script type="text/javascript">
+        function escaptHtml(str){
+            str = str.replace(/[<>&'"]/g,function(c){//使用正则匹配
+                switch (c){
+                    case "<" : return "&lt";//&#60
+                    case ">" : return "&gt";//&#62
+                    case "&" : return "&amp";//&#38
+                    case "'" : return "&apos";//IE不支持,&#39
+                    case "\"" : return "&quot";//&#34
+                }
+            })
+            return str;
+        }
+        var teststr = '1<3>2&&true';
+        console.log(escaptHtml(teststr));
+    </script>
+</body>
+</html>
