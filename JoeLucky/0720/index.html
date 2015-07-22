@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<ul id="list">
+    <li>11111111</li>
+    <li>22222222</li>
+    <li>33333333</li>
+    <li>44444444</li>
+    <li>55555555</li>
+</ul>
+</body>
+<script>
+
+    (function () {
+        var list = document.getElementById("list").getElementsByTagName("li");
+        for (var i = 0; i < list.length; i++) {
+            list[i].addEventListener("click", function (x) {
+                return function () {
+                    alert(x + 1); //闭包  不会对最外层的i变量造成
+                }
+            }(i));
+        }
+    })();
+
+/*
+   function aaa(){
+       var result= new Array();
+       for(var i=0;i<10;i++)
+           result[i]= function(num){
+               return function(){
+                   return num;
+               }
+           }(i);
+       return result;
+   }
+    var aa=aaa(); alert(aa)*/
+</script>
+</html>
