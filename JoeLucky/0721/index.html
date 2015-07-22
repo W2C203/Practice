@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <input id="one">   <button id="two">转换</button>默认转换“ <|>|&|"|' ”
+    <pre>
+        String.prototype.escapeHtml= function (){
+        return this.replace(/[<>&"']/g,function(x){
+            switch(x){
+                case "<": return "&lt";
+                case ">": return "&gt";
+                case "&": return "&amp";
+                case '"': return "&apos"; //(IE不支持)
+                case "'": return "&quot";
+            }
+        });
+    }
+    document.getElementById("two").onclick = function(){
+        var str= document.getElementById("one").value;
+        if(!str) str= "<|>|&|\"|'";
+        console.log("原字符串："+str);
+        console.log("转换后："+str.escapeHtml());
+    }
+    </pre>
+</body>
+<script>
+    String.prototype.escapeHtml= function (){
+        return this.replace(/[<>&"']/g,function(x){
+            switch(x){
+                case "<": return "&lt";
+                case ">": return "&gt";
+                case "&": return "&amp";
+                case '"': return "&apos"; //(IE不支持)
+                case "'": return "&quot";
+            }
+        });
+    }
+    document.getElementById("two").onclick = function(){
+        var str= document.getElementById("one").value;
+        if(!str) str= "<|>|&|\"|'";
+        console.log("原字符串："+str);
+        console.log("转换后："+str.escapeHtml());
+    }
+</script>
+</html>
+
+

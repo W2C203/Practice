@@ -1,0 +1,52 @@
+{
+    "task": [
+        {
+            "question_title": "<h1>2015-07-16[鼠标移入移出改变样式]</h1>",
+            "example_picture": ["http://7xkex2.com1.z0.glb.clouddn.com/2015-07-16.gif",
+                "http://7xkex2.com1.z0.glb.clouddn.com/2015-07-16_02.gif"],
+            "date": "0716"
+        },
+        {
+            "question_title": "2015-07-17[JS提起格式化URL]",
+            "question_explain": [
+                "这样一个URL：http://item.taobao.com/item.htm?a=1&b=2&c=&d=xxx&e ，请写一段JS程序提取URL中的各个GET参数(参数名和参数个数不确定)，将其按key-value形式返回到一个json结构中，如{a:'1',b:'2', c:'', d:'xxx', e:undefined}"
+            ],
+            "date": "0717"
+        },
+        {
+            "question_title": "2015-07-18[判定一个对象是否为数组]",
+            "question_explain": [
+                "JavaScript的数组是具有特殊行为的对象，而且封装了许多便捷的操作方法。所以给出一个未知对象，判断其是否为数组往往十分有效。写一个工具函数，判断一个未知对象是否为数组，要求尽可能多的适应JS（EC3，EC5）运行环境。"
+            ],
+            "date": "0718"
+        },
+        {
+            "question_title": "2015-07-19[Fisher-Yates乱序算法]",
+            "question_explain": [
+                "生活中需要用到乱序的地方很多，比如随机洗牌，随机中奖，音乐列表随机更新。要求实现一个随机打乱函数shuffle()，执行效果如下：",
+                "[1,2,3,4,5,6,7,8,9,10].shuffle();",
+                "[2,4,10,9,5,3,1,8,7,6]"
+            ],
+            "date": "0719"
+        },
+        {
+            "question_title": "2015-07-20[点击列表显示当前索引]",
+            "question_explain": [
+                "一个列表，如何实现点击每一列的时候alert其index，练习使用理解闭包"
+            ],
+            "date": "0720"
+        },
+        {
+            "question_title": "2015-07-21[字符转义，XSS预防]",
+            "question_explain": [
+                "为了保证页面输出安全，我们经常需要对一些特殊的字符进行转义，来预防XSS攻击，请写一个函数escapeHtml，将&lt;(左尖括号), &gt;(右尖括号), &amp;,&quot;(引号),进行转义。理解HTML实体"
+            ],
+            "date": "0721"
+        }
+    ],
+    "person": {
+        "name1":"hywilliam",
+        "name2":"JoeLucky",
+        "name3":"SeanLee"
+    }
+}
