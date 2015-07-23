@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+</head>
+<body>
+<pre>
+    function List() {
+        this.dataStore = [];
+        this.listSize = 0;              // 列表元素数量
+        this.pos = 0;                   // 当前元素位置：指针
+    }
+
+    List.prototype = {
+        constructor: List,              // 构造器属性，不要忘记，不然就是相对obj.prototype
+        append: function (element) {
+            // 给列表的下一个位置添加新元素
+            this.dataStore[this.listSize++] = element;
+        },
+        find: function (element) {
+            // 在列表中查找某一元素，找到返回列表位置，找不到返回-1
+            for (var i = 0; i < this.dataStore.length; ++i) {
+                if (this.dataStore[i] == element) {
+                    return i;
+                }
+            }
+            return -1;
+        },
+        remove: function (element) {
+            // 从列表中删除元素
+            var foundAt = this.find(element);
+            if (foundAt > -1) {
+                this.dataStore.splice(foundAt, 1);
+                --this.listSize;
+                return true;
+            }
+            return false;
+        },
+        insert: function (element, after) {
+            // 在某个元素之后插入一个元素
+            var insertPos = this.find(after);
+            if (insertPos > -1) {
+                this.dataStore.splice(insertPos+1, 0, element);
+                ++this.listSize;
+                return true;
+            }
+            return false;
+        },
+        clear: function () {
+            // 清空列表元素
+            delete this.dataStore;
+            this.dataStore = [];
+            this.listSize = this.pos = 0;
+        },
+        contains: function (element) {
+            // 是否包含某个元素
+            for (var i = 0; i < this.dataStore.length; i++) {
+                if (this.dataStore[i] == element) {
+                    return true;
+                }
+            }
+            return false;
+        },
+        display: function () {
+            // 显示列表中的元素
+            return this.dataStore;
+        },
+        length: function () {
+            return this.listSize;
+        },
+        front : function () {
+            // 指向第一个元素
+            this.pos = 0;
+        },
+        end: function () {
+            // 指向最后一个元素
+            this.pos = this.listSize - 1;
+        },
+        prev: function () {
+            // 前一个元素
+            if (this.pos > 0) {
+                --this.pos;
+            }
+        },
+        next: function () {
+            // 下一个元素
+            if (this.pos < this.listSize - 1) {
+                ++this.pos;
+            }
+        },
+        currPos: function () {
+            // 当前元素
+            return this.pos;
+        },
+        moveTo: function (position) {
+            // 移动到第几个元素
+            this.pos = position;
+        },
+        getElement: function () {
+            // 获得当前元素
+            return this.dataStore[this.pos];
+        }
+    };
+</pre>
+<script>
+    function List() {
+        this.dataStore = [];
+        this.listSize = 0;              // 列表元素数量
+        this.pos = 0;                   // 当前元素位置：指针
+    }
+
+    List.prototype = {
+        constructor: List,              // 构造器属性，不要忘记，不然就是相对obj.prototype
+        append: function (element) {
+            // 给列表的下一个位置添加新元素
+            this.dataStore[this.listSize++] = element;
+        },
+        find: function (element) {
+            // 在列表中查找某一元素，找到返回列表位置，找不到返回-1
+            for (var i = 0; i < this.dataStore.length; ++i) {
+                if (this.dataStore[i] == element) {
+                    return i;
+                }
+            }
+            return -1;
+        },
+        remove: function (element) {
+            // 从列表中删除元素
+            var foundAt = this.find(element);
+            if (foundAt > -1) {
+                this.dataStore.splice(foundAt, 1);
+                --this.listSize;
+                return true;
+            }
+            return false;
+        },
+        insert: function (element, after) {
+            // 在某个元素之后插入一个元素
+            var insertPos = this.find(after);
+            if (insertPos > -1) {
+                this.dataStore.splice(insertPos + 1, 0, element);
+                ++this.listSize;
+                return true;
+            }
+            return false;
+        },
+        clear: function () {
+            // 清空列表元素
+            delete this.dataStore;
+            this.dataStore = [];
+            this.listSize = this.pos = 0;
+        },
+        contains: function (element) {
+            // 是否包含某个元素
+            for (var i = 0; i < this.dataStore.length; i++) {
+                if (this.dataStore[i] == element) {
+                    return true;
+                }
+            }
+            return false;
+        },
+        display: function () {
+            // 显示列表中的元素
+            return this.dataStore;
+        },
+        length: function () {
+            return this.listSize;
+        },
+        front: function () {
+            // 指向第一个元素
+            this.pos = 0;
+        },
+        end: function () {
+            // 指向最后一个元素
+            this.pos = this.listSize - 1;
+        },
+        prev: function () {
+            // 前一个元素
+            if (this.pos > 0) {
+                --this.pos;
+            }
+        },
+        next: function () {
+            // 下一个元素
+            if (this.pos < this.listSize - 1) {
+                ++this.pos;
+            }
+        },
+        currPos: function () {
+            // 当前元素
+            return this.pos;
+        },
+        moveTo: function (position) {
+            // 移动到第几个元素
+            this.pos = position;
+        },
+        getElement: function () {
+            // 获得当前元素
+            return this.dataStore[this.pos];
+        }
+    };
+    /*******************TEST***********************/
+    var names = new List();
+    names.append('wyh');
+    names.append('chz');
+    names.append('cls');
+    names.append('bug');
+    console.log(names.display());
+    console.log(names.find('bug'));
+
+</script>
+</body>
+</html>

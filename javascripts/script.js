@@ -49,16 +49,15 @@
             return false;
         })
     });
-})(jQuery)
+})(jQuery);
 
 
 ////////////////// here changed by Joe
 
 function add(obj,person){//person 信息放入 obj中
     obj["person"]=person;
-    console.log(obj)
+    //console.log(obj)
     return obj;
-
 }
 function fill(template_id,fill_id){     //  获取指定元素id模板 填充数据data后 插回到到id前
 
@@ -73,7 +72,7 @@ $.getJSON("data.json", function (data) {        // 注意再chrome浏览器中 �
         var temp = add(obj,data.person);   //将两个对象合并返回 obj 等价于 data.task[i]
         fill("template1","fill_here",temp);  // 参数为模板id 最终加入DOM结构ID 需添加的数据
     })
-})
+});
 
 
 
