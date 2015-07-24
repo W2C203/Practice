@@ -24,7 +24,7 @@ $(document).ready(function () {
                     var box = $('<div>').addClass('box').appendTo($('#container'));
                     var content = $('<div>').addClass('content').appendTo(box);
 //                    console.log('index')
-                    $('<img>').attr('src', '../../images/waterflow/' + $(val).attr('src')).appendTo(content);
+                    $('<img>').attr('src', 'http://7xihsv.com1.z0.glb.clouddn.com/' + $(val).attr('src')).appendTo(content);
                 });
                 imgLocation();
             }
