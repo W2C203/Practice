@@ -8,12 +8,12 @@ $(document).ready(function () {
         // 数据模拟
         var dataImg = {
             'data': [
-                {'src': '1.jpeg'},
-                {'src': '5.jpeg'},
-                {'src': '6.jpeg'},
-                {'src': '7.jpeg'},
-                {'src': '8.jpeg'},
-                {'src': '9.jpeg'}
+                {'src': '1.jpg'},
+                {'src': '5.jpg'},
+                {'src': '6.jpg'},
+                {'src': '7.jpg'},
+                {'src': '8.jpg'},
+                {'src': '9.jpg'}
             ]
         };
         // 鼠标滑动监听
