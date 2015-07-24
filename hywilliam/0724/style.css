@@ -1,0 +1,21 @@
+html,
+body {
+  margin: 0;
+}
+
+img {
+  width: 310px;
+  height: auto;
+  background-size: cover;
+}
+
+.box {
+  position: relative;
+  float: left;
+}
+
+.content {
+  padding: 10px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 5px #ccc;
+}

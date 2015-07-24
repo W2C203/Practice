@@ -73,6 +73,13 @@
                 "getElement(方法)：返回当前位置的元素"
             ],
             "date": "0723"
+        },
+        {
+            "question_title": "2015-07-24[jQuery瀑布流]",
+            "question_explain": ["运用jQuery制作瀑布流展示页，重点在绝对定位理解和滚动加载",
+                "参考资料：<a href='http://www.jikexueyuan.com/course/264.html'>jQuery瀑布流</a>"
+            ],
+            "date": "0724"
         }
 
     ],
