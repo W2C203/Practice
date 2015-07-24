@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>列表数据结构练习</title>
+    <script type="text/javascript">
+        function show() {
+            var pre = document.getElementById("content");
+            pre.style.display = "block";
+        }
+    </script>
+</head>
+<body>
+    <h1>封装一个列表类，使其实现如下功能：</h1>
+    <pre>
+        listSize（属性）：查看列表元素个数，
+
+        pos（属性）：列表元素的当前位置，
+
+        length（方法）：返回列表中元素的个数，
+
+        clear（方法）：清空列表中的所有元素
+
+        display(方法)：显示列表内容
+
+        find(方法)：找到某个元素在哪个位置
+
+        contains(方法)：是否包含某个元素
+
+        insert(方法)：在现有元素后插入新元素
+
+        append(方法)：在列表的末尾添加新元素
+
+        remove(方法)：从列表中删除元素
+
+        front(方法)：将列表的当前位置移动到开头
+
+        end(方法)：将列表当前位置移动到末尾
+
+        prev(方法)：指针位置前移
+
+        next(方法)：指针位置后移
+
+        currPos(方法)：指针当前位置
+
+        moveTo(方法)：移动指针至某个位置
+
+        getElement(方法)：返回当前位置的元素
+    </pre>
+    <button onclick="show()">点击查看实现代码</button>
+    <pre id="content" style="display: none">
+        function List() {//列表类
+            this.data = [];//存储列表元素
+            this.listSize = 0;//列表元素个数
+            this.pos = 0;//列表元素的当前位置
+        }
+        List.prototype = {
+            constructor: List,
+            length: function() {
+            //返回列表长度
+                return this.listSize;
+            },
+            clear: function() {
+            //清空列表元素
+                delete this.data;
+                this.data = [];
+                this.listSize = 0;
+                this.pos = 0;
+                return true;
+            },
+            display: function() {
+            //返回列表数据
+                return this.data;
+            },
+            find: function(ele) {
+            //查找元素，找到返回其位置，否则返回-1
+                for(var i = 0; i < this.data.length; i++) {
+                    if(this.data[i] == ele) {
+                        this.pos = i;
+                        return this.pos;
+                    }
+                }
+                return -1;
+            },
+            contains: function(ele) {
+            //查找元素，找到返回true，否则返回false
+                for(var i = 0; i < this.data.length; i++) {
+                    if(this.data[i] == ele) {
+                        return true;
+                    }
+                }
+                return false;
+            },
+            insert: function(newEle,pos) {
+            //待插入位置应在正确范围内，插入后元素后移
+            // 插入位置为某元素之前，成功返回插入位置，失败返回-1
+                if(pos < this.listSize && pos >= 0) {
+                    data.splice(pos, 0, newEle);
+                    this.listSize++;
+                    this.pos = pos;
+                }
+                return -1;
+            },
+            append: function(newEle) {
+            //增加一个元素，列表长度+1，指针指向最后一个元素
+                this.data.push(newEle);
+                this.listSize++;
+                this.pos = this.data.length;
+                return this.pos;
+            },
+            remove: function(ele) {
+            //删除某个元素,失败返回-1
+            // 成功返回当前位置，如果删除的是最后一个元素，返回当前最后一个元素位置
+                var index = this.find(ele);
+                if(index != -1) {
+                    this.data.splice(index, 1);
+                    this.listSize--;
+                    if(index < this.listSize - 1) {
+                        this.pos = index;
+                        return this.pos;
+                    }else {
+                        this.pos = this.data.length - 1;
+                        return this.pos;
+                    }
+                }
+                return -1;
+            },
+            front: function() {
+            //指向第一个元素，返回第一个元素位置
+                this.pos = 0;
+                return this.pos;
+            },
+            end: function() {
+            //指向最后一个元素，返回其位置
+                this.pos = this.length()-1;
+                return this.pos;
+            },
+            prev: function() {
+            //如果不是第一个元素，返回前一个元素位置，否则返回-1
+                if(this.pos > 0) {
+                    this.pos--;
+                    return this.pos;
+                }
+                return -1;
+            },
+            next: function() {
+            //如果不是最后一个元素，返回后一个元素位置，否则返回-1
+                if(this.pos < this.listSize - 1) {
+                    this.pos++;
+                    return this.pos;
+                }
+                return -1;
+            },
+            currPos: function() {
+            //返回当前位置
+                return this.pos;
+            },
+            moveTo: function(position) {
+            //移动指针到某个位置，并返回那个位置，失败返回-1
+                if(position < this.listSize) {
+                    this.pos = position;
+                    return this.pos;
+                }
+                return -1;
+            },
+            getElement: function() {
+            //返回当前元素
+                return this.data[this.pos];
+            }
+        }
+    </pre>
+    <script type="text/javascript">
+        function List() {
+            this.data = [];//存储列表元素
+            this.listSize = 0;//列表元素个数
+            this.pos = 0;//列表元素的当前位置
+        }
+        List.prototype = {
+            constructor: List,
+            length: function() {
+            //返回列表长度
+                return this.listSize;
+            },
+            clear: function() {
+            //清空列表元素
+                delete this.data;
+                this.data = [];
+                this.listSize = 0;
+                this.pos = 0;
+                return true;
+            },
+            display: function() {
+            //返回列表数据
+                return this.data;
+            },
+            find: function(ele) {
+            //查找元素，找到返回其位置，否则返回-1
+                for(var i = 0; i < this.data.length; i++) {
+                    if(this.data[i] == ele) {
+                        this.pos = i;
+                        return this.pos;
+                    }
+                }
+                return -1;
+            },
+            contains: function(ele) {
+            //查找元素，找到返回true，否则返回false
+                for(var i = 0; i < this.data.length; i++) {
+                    if(this.data[i] == ele) {
+                        return true;
+                    }
+                }
+                return false;
+            },
+            insert: function(newEle,pos) {
+            //待插入位置应在正确范围内，插入后元素后移
+            // 插入位置为某元素之前，成功返回插入位置，失败返回-1
+                if(pos < this.listSize && pos >= 0) {
+                    data.splice(pos, 0, newEle);
+                    this.listSize++;
+                    this.pos = pos;
+                }
+                return -1;
+            },
+            append: function(newEle) {
+            //增加一个元素，列表长度+1，指针指向最后一个元素
+                this.data.push(newEle);
+                this.listSize++;
+                this.pos = this.data.length;
+                return this.pos;
+            },
+            remove: function(ele) {
+            //删除某个元素,失败返回-1
+            // 成功返回当前位置，如果删除的是最后一个元素，返回当前最后一个元素位置
+                var index = this.find(ele);
+                if(index != -1) {
+                    this.data.splice(index, 1);
+                    this.listSize--;
+                    if(index < this.listSize - 1) {
+                        this.pos = index;
+                        return this.pos;
+                    }else {
+                        this.pos = this.data.length - 1;
+                        return this.pos;
+                    }
+                }
+                return -1;
+            },
+            front: function() {
+            //指向第一个元素，返回第一个元素位置
+                this.pos = 0;
+                return this.pos;
+            },
+            end: function() {
+            //指向最后一个元素，返回其位置
+                this.pos = this.length()-1;
+                return this.pos;
+            },
+            prev: function() {
+            //如果不是第一个元素，返回前一个元素位置，否则返回-1
+                if(this.pos > 0) {
+                    this.pos--;
+                    return this.pos;
+                }
+                return -1;
+            },
+            next: function() {
+            //如果不是最后一个元素，返回后一个元素位置，否则返回-1
+                if(this.pos < this.listSize - 1) {
+                    this.pos++;
+                    return this.pos;
+                }
+                return -1;
+            },
+            currPos: function() {
+            //返回当前位置
+                return this.pos;
+            },
+            moveTo: function(position) {
+            //移动指针到某个位置，并返回那个位置，失败返回-1
+                if(position < this.listSize) {
+                    this.pos = position;
+                    return this.pos;
+                }
+                return -1;
+            },
+            getElement: function() {
+            //返回当前元素
+                return this.data[this.pos];
+            }
+        }
+    </script>
+</body>
+</html>

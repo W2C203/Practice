@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>数组的简单面向对象练习</title>
+</head>
+<body>
+    <pre>
+    var classObj = [];//班级对象数组
+    function Student(name, score) {
+        this.name = name;//学生姓名
+        this.score = score;//学生成绩
+    }
+    Student.prototype = {
+        constructor: Student,
+        getName: function() {//获取名字
+            return this.name;
+        },
+        getScore: function() {//获取成绩
+            return this.score;
+        },
+        joinClass: function() {//加入班级
+            classObj.push(this);
+        },
+        getAve: function() {//得到班级平均分
+            var sum = 0;
+            for(var i = 0; i < classObj.length; i++) {
+                sum += classObj[i].getScore();
+            }
+            return sum / classObj.length;
+        },
+        sortScore: function() {//班级排名，升序
+            return classObj.sort(function (a,b) {
+                return a.getScore() - b.getScore();
+            })
+        }
+    };
+    //以下是测试
+    var Joe = new Student("Joe", 88);//新生报到
+    Joe.joinClass();//加入班级
+    var Sean = new Student("Sean", 89);
+    Sean.joinClass();
+    var Hywilliam = new Student("Hywilliam", 90);
+    Hywilliam.joinClass();
+    var John = new Student("John", 77);
+    John.joinClass();
+    console.log(Sean.name + "'s score is: ");
+    console.log(Sean.getScore());//89
+    console.log(Sean.name + "views the average: ");
+    console.log(Sean.getAve());//86
+    console.log("The best student is: ");
+    console.log(Sean.sortScore()[classObj.length-1].getName() + ": "
+            + Sean.sortScore()[classObj.length-1].getScore());//Hywilliam: 90
+    </pre>
+<script type="text/javascript">
+    var classObj = [];//班级对象数组
+    function Student(name, score) {
+        this.name = name;//学生姓名
+        this.score = score;//学生成绩
+    }
+    Student.prototype = {
+        constructor: Student,
+        getName: function() {//获取名字
+            return this.name;
+        },
+        getScore: function() {//获取成绩
+            return this.score;
+        },
+        joinClass: function() {//加入班级
+            classObj.push(this);
+        },
+        getAve: function() {//得到班级平均分
+            var sum = 0;
+            for(var i = 0; i < classObj.length; i++) {
+                sum += classObj[i].getScore();
+            }
+            return sum / classObj.length;
+        },
+        sortScore: function() {//班级排名，升序
+            return classObj.sort(function (a,b) {
+                return a.getScore() - b.getScore();
+            })
+        }
+    };
+    //以下是测试
+    var Joe = new Student("Joe", 88);//新生报到
+    Joe.joinClass();//加入班级
+    var Sean = new Student("Sean", 89);
+    Sean.joinClass();
+    var Hywilliam = new Student("Hywilliam", 90);
+    Hywilliam.joinClass();
+    var John = new Student("John", 77);
+    John.joinClass();
+    console.log(Sean.name + "'s score is: ");
+    console.log(Sean.getScore());
+    console.log(Sean.name + "views the average: ");
+    console.log(Sean.getAve());
+    console.log("The best student is: ");
+    console.log(Sean.sortScore()[classObj.length-1].getName() + ": "
+            + Sean.sortScore()[classObj.length-1].getScore());
+</script>
+</body>
+</html>
