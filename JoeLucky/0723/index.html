@@ -5,23 +5,14 @@
     <title></title>
 </head>
 <body>
-<pre>
-
-    </pre>
-</body>
-<script>
-    /*
-     代码中未使用到 但是可以使用的方法：
-     arrayObject.splice(index,howmany,item1,.....,itemX)
-     splice() 方法可删除从 index(下标，从0开始) 处开始的零个或多个元素，并且用参数列表中声明的一个或多个值来替换那些被删除的元素。
-     */
+    <pre>
     List = function () {
         this.listSize = 0;         //列表元素个数
         this.pos = 0;              //列表元素的当前位置
         this.data = []             //存放列表元素信息 下标从0开始
-        //这里直接放clear（） 可以吗？
     }
     List.prototype = {
+        constructor: List,
         //length 返回列表中元素的个数
         length: function () {
             return this.listSize;
@@ -122,14 +113,122 @@
             return this.data[this.pos];
         }
     }
-    var a = new List();
-    a.append(1);
-    a.append(2);
-    a.append(998);
-    a.append(5);
-    a.append(6);
-    a.append(7);
-
+    </pre>
+</body>
+<script>
+    /*
+     代码中未使用到 但是可以使用的方法：
+     arrayObject.splice(index,howmany,item1,.....,itemX)
+     splice() 方法可删除从 index(下标，从0开始) 处开始的零个或多个元素，并且用参数列表中声明的一个或多个值来替换那些被删除的元素。
+     */
+    List = function () {
+        this.listSize = 0;         //列表元素个数
+        this.pos = 0;              //列表元素的当前位置
+        this.data = []             //存放列表元素信息 下标从0开始
+        //这里直接放clear（） 可以吗？
+    }
+    List.prototype = {
+        constructor: List,
+        //length 返回列表中元素的个数
+        length: function () {
+            return this.listSize;
+        },
+        //clear 清空列表中的所有元素
+        clear: function () {
+            this.listSize = 0;
+            this.pos = 0;
+            this.data = []
+        },
+        //display 显示列表内容
+        display: function () {
+            console.log(this.data);
+            return this.data;
+        },
+        //find 找到某个元素在哪个位置  从1开始    存在多个时 只返回第一个
+        find: function (obj) {
+            for (var i = 0; i < this.listSize; i++) {
+                if (obj == this.data[i]) {
+                    return i + 1;
+                }
+            }
+            return false;
+        },
+        //contains 是否包含某个元素
+        contains: function (obj) {
+            for (var i = 0; i < this.listSize; i++) {
+                if (obj === this.data[i]) {
+                    return true;
+                }
+            }
+            return false;
+        },
+        //insert 在现有元素has后插入新元素obj    存在多个时 只在第一个后面插入
+        insert: function (has, obj) {
+            var location = this.find(has);
+            if (!location) {
+                console.log("找不到现有元素");
+                return false;
+            }
+            for (var i = this.listSize - 1; i >= location; i--) {//后移 挪出location后面的位子
+                this.data[i + 1] = this.data[i];
+            }
+            this.data[location] = obj;
+            this.listSize++;
+            return true;
+        },
+        //append 在列表的末尾添加新元素obj
+        append: function (obj) {
+            this.data[this.listSize] = obj;
+            this.listSize++;
+        },
+        //remove 从列表中删除元素obj
+        remove: function (obj) {
+            var location = this.find(obj);
+            if (!location) {
+                console.log("找不到要删除的元素");
+                return false;
+            }
+            for (var i = location - 1; i < this.listSize - 1; i++) {//前移 覆盖删除location-1（对应元素）
+                this.data[i] = this.data[i + 1];
+            }
+            this.data.length--;
+            this.listSize--;
+            return true;
+        },
+        //front 将列表的当前位置移动到开头
+        front: function () {
+            this.pos = 0;
+        },
+        //end 将列表当前位置移动到末尾
+        end: function () {
+            if (this.listSize == 0)  return;
+            this.pos = this.listSize - 1;
+        },
+        //prev 指针位置前移
+        prev: function () {
+            if (this.pos > 0) {
+                this.pos--;
+            }
+        },
+        //next 指针位置后移
+        next: function () {
+            if (this.pos < this.listSize - 1) {
+                this.pos++;
+            }
+        },
+        //currPos 指针当前位置
+        currPos: function () {
+            return this.pos;
+        },
+        //moveTo 移动指针至某个位置location  从1开始
+        moveTo: function (location) {
+            this.pos = location - 1;
+        },
+        //getElement 返回当前位置的元素
+        getElement: function () {
+            return this.data[this.pos];
+        }
+    }
 </script>
 </html>
 
