@@ -6,7 +6,7 @@ body {
 img {
   width: 310px;
   height: auto;
-  background-size: cover;
+  /*background-size: cover;*/
 }
 
 .box {
