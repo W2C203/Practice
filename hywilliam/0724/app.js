@@ -36,7 +36,7 @@ function scrollside() {
     var box = $('.box');
     // 最后一张图片距页面顶端的高度与最后一张图本身高度一半之和
     var lastboxHeight = box.last().get(0).offsetTop + Math.floor(box.last().height()/2);
-    // 文档高度
+    // 视窗高度
     var windowHeight = $(window).height();
     // 鼠标滚轮向下滚动距页顶的高度
     var scrollHeight = $(window).scrollTop();

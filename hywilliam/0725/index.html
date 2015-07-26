@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+</head>
+<body>
+<p>1. 以下JS程序的输出是什么</p>
+<pre>
+    var a="undefined";
+    var b="false";
+    var c="";
+    function assert(aVar){
+        if(aVar)
+            alert(true);
+        else
+            alert(false);
+    }
+    assert(a);
+    assert(b);
+    assert(c);
+</pre>
+<p>2. 以下JS程序的输出是什么</p>
+<pre>
+    function Foo(){
+     var i=0;
+     return function(){
+         document.write(i++);
+     }
+}
+    var f1=Foo(),
+    f2=Foo();
+    f1();
+    f1();
+    f2();
+</pre>
+</body>
+</html>
