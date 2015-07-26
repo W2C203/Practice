@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>两道JS题目</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+</head>
+<body>
+<p>1. 以下JS程序的输出是什么</p>
+<pre>
+    var a="undefined";//字符串
+    var b="false";//字符串
+    var c="";//空字符串
+    function assert(aVar){
+        if(aVar)
+            alert(true);
+        else
+            alert(false);
+    }
+    assert(a);//true
+    assert(b);//true
+    assert(c);//false
+</pre>
+<p>2. 以下JS程序的输出是什么</p>
+<pre>
+    function Foo(){
+     var i=0;
+     return function(){
+         document.write(i++);
+     }
+}
+    var f1=Foo(),//f1:function(){ document.write(i++); }
+    f2=Foo();//f2:function(){ document.write(i++); }    //f1 != f2
+    f1();//0
+    f1();//1
+    f2();//0
+</pre>
+</body>
+</html>
