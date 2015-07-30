@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+</head>
+<body>
+<div class="">
+    <div class=""></div>
+</div>
+<div class="">
+    <div class="">
+        <div class="" id="node2"></div>
+    </div>
+</div>
+<div class="">
+    <div class=""><p><a href=""></a></p></div>
+    <div class="">
+        <p>
+            <button><a href="" id="node1"></a></button>
+        </p>
+    </div>
+</div>
+<pre>
+    function commonParentNode(/* 参数为原生DOM对象 */) {
+        var nodeNum = arguments.length,
+            node, // 当前节点
+            parent,// 父节点
+            uid,// DOM节点的唯一标识
+            counter = 0,
+            i = 0,
+            hash = {};//最后结果
+
+        for (; i < nodeNum; ++i) {
+            node = arguments[i];
+            while (parent = node.parentNode) {
+                if (parent.nodeType === 9) {
+                    // 到Document根节点就跳出循环
+                    break;
+                }
+                // 查找或添加标识符来唯一标识当前节点
+                uid = parent.getAttribute('data-find');
+                // 如果当前DOM节点没有遍历过，则增加标志属性
+                if (!uid) {
+                    uid = '_' + (++counter); // 避免chrome对hash对象重排序
+                    parent.setAttribute('data-find', uid);
+                }
+                // 如果当前DOM节点已在结果集中，则计数+1
+                if (hash[uid]) {
+                    hash[uid].count++;
+                }
+                // 如果当前DOM节点尚未在结果集中，则加入
+                else {
+                    hash[uid] = {node: parent, count: 1};
+                }
+                node = parent;
+            }
+        }
+        for (i in hash) {
+            if (hash[i].count === nodeNum) {
+                return hash[i].node;
+            }
+        }
+    }
+
+    /**
+     * TEST
+     */
+    var node1 = document.getElementById('node1'),
+    node2     = document.getElementById('node2');
+
+    console.log(commonParentNode(node1, node2));
+</pre>
+<script>
+    function commonParentNode(/* 参数为原生DOM对象 */) {
+        var nodeNum = arguments.length,
+            node, // 当前节点
+            parent,// 父节点
+            uid,// DOM节点的唯一标识
+            counter = 0,
+            i = 0,
+            hash = {};//最后结果
+
+        for (; i < nodeNum; ++i) {
+            node = arguments[i];
+            while (parent = node.parentNode) {
+                if (parent.nodeType === 9) {
+                    // 到Document根节点就跳出循环
+                    break;
+                }
+                // 查找或添加标识符来唯一标识当前节点
+                uid = parent.getAttribute('data-find');
+                // 如果当前DOM节点没有遍历过，则增加标志属性
+                if (!uid) {
+                    uid = '_' + (++counter); // 避免chrome对hash对象重排序
+                    parent.setAttribute('data-find', uid);
+                }
+                // 如果当前DOM节点已在结果集中，则计数+1
+                if (hash[uid]) {
+                    hash[uid].count++;
+                }
+                // 如果当前DOM节点尚未在结果集中，则加入
+                else {
+                    hash[uid] = {node: parent, count: 1};
+                }
+                node = parent;
+            }
+        }
+        for (i in hash) {
+            if (hash[i].count === nodeNum) {
+                return hash[i].node;
+            }
+        }
+    }
+
+    /**
+     * TEST
+     */
+    var node1 = document.getElementById('node1'),
+    node2     = document.getElementById('node2');
+
+    console.log(commonParentNode(node1, node2));
+</script>
+</body>
+</html>
