@@ -114,13 +114,25 @@
         }
     }
 
+    function find(oNode1, oNode2) {
+        if(oNode2.contains(oNode1)) {
+            return oNode2;
+        }
+        while (oNode1) {
+            if(oNode1.contains(oNode2)) {
+                return oNode1;
+            }
+            oNode1 = oNode1.parentNode;
+        }
+    }
     /**
      * TEST
      */
     var node1 = document.getElementById('node1'),
     node2     = document.getElementById('node2');
 
-    console.log(commonParentNode(node1, node2));
+//    console.log(commonParentNode(node1, node2));
+    console.log(find(node1,node2));
 </script>
 </body>
 </html>
