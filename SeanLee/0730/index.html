@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <title>DOM节点查找</title>
+    <meta charset="utf-8">
+</head>
+<body>
+<p id="p1">这是P1</p>
+<div id="div1">div1
+    <div id="div2">div2
+        <div id="div3">div3
+            <div id="div4">div4
+                <p id="dom2">这是要找的DOM2</p>
+            </div>
+        </div>
+        <div id="dom1">这是要找的DOM1</div>
+    </div>
+</div>
+<pre>
+    只考虑找两个节点的情况：
+    方法一：使用已有函数实现遍历，contains函数
+    function commonParentNode(oNode1, oNode2) {
+        if (oNode1.contains(oNode2)) {
+            return oNode1;
+        } else if (oNode2.contains(oNode1)) {
+            return oNode2;
+        } else {
+            return commonParentNode(oNode1.parentNode,oNode2);
+        }
+    }
+    var o1 = document.getElementById('dom1');
+    var o2 = document.getElementById('dom2');
+    var com = commonParentNode(o1,o2);
+    console.log(com.id);//div2
+
+    //方法二：自己写contain函数
+    function contain(A, B) {
+        do{
+            if (A == B) {
+                return true;
+            } else {
+                B = B.parentNode;
+            }
+        } while (B !== null);
+    }
+    function commonParentNode(oNode1, oNode2) {
+        if(contain(oNode1, oNode2)) {
+            return oNode1;
+        } else if (contain(oNode2, oNode1)) {
+            return oNode2;
+        } else {
+            return commonParentNode(oNode1.parentNode, oNode2);
+        }
+    }
+    var o1 = document.getElementById('dom1');
+    var o2 = document.getElementById('dom2');
+    var o3 = document.getElementById('p1');
+    var com = commonParentNode(o1,o2);
+    var com = commonParentNode(com,o3);//根据这样应该可以找出n个节点，调用n-1次此方法
+    console.log(com.nodeName);//BODY
+
+    //本想使用NodeIterator遍历节点,但是失败了
+</pre>
+<script type="text/javascript">
+//    方法一：使用已有函数实现遍历，contains函数
+//            function commonParentNode(oNode1, oNode2) {
+//                if (oNode1.contains(oNode2)) {
+//                    return oNode1;
+//                } else if (oNode2.contains(oNode1)) {
+//                    return oNode2;
+//                } else {
+//                    return commonParentNode(oNode1.parentNode,oNode2);
+//                }
+//            }
+//            var o1 = document.getElementById('dom1');
+//            var o2 = document.getElementById('dom2');
+//            var com = commonParentNode(o1,o2);
+//            console.log(com.id);
+
+    //方法二：自己写contain函数
+    function contain(A, B) {
+        do{
+            if (A == B) {
+                return true;
+            } else {
+                B = B.parentNode;
+            }
+        } while (B !== null);
+    }
+    function commonParentNode(oNode1, oNode2) {
+        if(contain(oNode1, oNode2)) {
+            return oNode1;
+        } else if (contain(oNode2, oNode1)) {
+            return oNode2;
+        } else {
+            return commonParentNode(oNode1.parentNode, oNode2);
+        }
+    }
+    var o1 = document.getElementById('dom1');
+    var o2 = document.getElementById('dom2');
+    var o3 = document.getElementById('p1');
+    var com = commonParentNode(o1,o2);
+    var com = commonParentNode(com,o3);
+    console.log(com.nodeName);
+
+    //方法三：使用NodeIterator遍历节点,但是失败了
+</script>
+</body>
+</html>
