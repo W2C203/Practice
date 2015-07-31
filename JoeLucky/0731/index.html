@@ -6,7 +6,17 @@
     <script src="../../lib/jquery.min.js"></script>
 </head>
 <body>
-
+<pre>
+    //封装函数f，使f的this指向指定的对象。输入栗子：
+    function bindThis(fun,obj){
+            return $.proxy(fun,obj);
+    }
+    var re = bindThis(function(a, b) {return this.test + a + b},
+            {test: 1}
+            )(2, 3);
+    console.log(re);
+    //输出栗子：6
+</pre>
 </body>
 <script>
     //封装函数f，使f的this指向指定的对象。输入栗子：
