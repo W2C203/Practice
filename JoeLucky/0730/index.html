@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body class="123IsMe">
+<div class="">
+    <div class="">
+        <div class="12IsMe" id="node1">
+            <a href="" id="node2"></a>
+        </div>
+    </div>
+</div>
+<div class="">
+    <div class=""></div>
+    <div class="">
+        <p>
+            <div><a href="" id="node3"></a></div>
+        </p>
+    </div>
+</div>
+</body>
+<pre>
+    //基本思想：
+    // 首先建立一个结果对象，保存所有节点
+    // 然后从每个给出节点进行找父节点操作，每找到一个父节点，
+    // 加入到结果对象中，并给经过标记+1（没有的就新建）
+    // 最后从结果对象中遍历（注意要防止其自动排序） 经过标记 == 节点数 的 即为所求节点
+
+    /**
+     * 寻找N个DOM对象 最近的一个共同父节点，可以包括节点自身
+     * @parram {DOM对象} 可以传递任意多个DOM对象
+     * @returns {DOM对象} 返回找到的DOM对象
+     */
+    function commonParentNode() {
+        var re = {},        //结果对象 里面存放节点信息 以及经过数
+                node,       //保存操作的当前节点
+                id,             //当前节点的标识
+                grade = 0;  //为每个节点分配标识 当前标号
+        for (var i = 0; i < arguments.length; i++) {
+            node = arguments[i];
+            do {
+
+                if (node.nodeType === 9) {//Document根节点 节点类型为9
+                    break;
+                }
+                id = node.getAttribute('myId');     //取得当前节点的myId属性
+                if (!id) {                                          //没有该属性则用grade分配 并设置经过数为1 退出当次循环
+                    id = '_' + ++grade;
+                    node.setAttribute('myId', id);
+                    re[id] = {node: node, count: 1};
+                } else {
+                    re[id].count++;                         //经过数加1
+                }
+            } while (node = node.parentNode);
+        }
+        for (i in re) {
+            if (re[i].count === arguments.length) {
+                return re[i].node;
+            }
+        }
+    }
+    var node1 = document.getElementById('node1'),
+        node2 = document.getElementById('node2');
+        node3 = document.getElementById('node3');
+    console.log(commonParentNode(node1, node2, node3));
+</pre>
+<script>
+    //基本思想：
+    // 首先建立一个结果对象，保存所有节点
+    // 然后从每个给出节点进行找父节点操作，每找到一个父节点，
+    // 加入到结果对象中，并给经过标记+1（没有的就新建）
+    // 最后从结果对象中遍历（注意要防止其自动排序） 经过标记 == 节点数 的 即为所求节点
+    /**
+     * 寻找N个DOM对象 最近的一个共同父节点，可以包括节点自身
+     * @parram {DOM对象} 可以传递任意多个DOM对象
+     * @returns {DOM对象} 返回找到的DOM对象
+     */
+    function commonParentNode() {
+        var re = {},        //结果对象 里面存放节点信息 以及经过数
+                node,       //保存操作的当前节点
+                id,         //当前节点的标识
+                grade = 0;  //为每个节点分配标识 当前标号
+        for (var i = 0; i < arguments.length; i++) {
+            node = arguments[i];
+            do {
+
+                if (node.nodeType === 9) {//Document根节点 节点类型为9
+                    break;
+                }
+                id = node.getAttribute('myId');//取得当前节点的myId属性
+                if (!id) {                    //没有该属性则用grade分配 并设置经过数为1 退出当次循环
+                    id = '_' + ++grade;
+                    node.setAttribute('myId', id);
+                    re[id] = {node: node, count: 1};
+                } else {
+                    re[id].count++;      //经过数加1
+                }
+            } while (node = node.parentNode);
+        }
+        for (i in re) {
+            if (re[i].count === arguments.length) {
+                return re[i].node;
+            }
+        }
+    }
+    var node1 = document.getElementById('node1'),
+        node2 = document.getElementById('node2');
+        node3 = document.getElementById('node3');
+    console.log(commonParentNode(node1, node2, node3));
+</script>
+</html>
