@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+</head>
+<body>
+<script>
+    function bindThis(f, oTarget) {
+        return function() {
+            return f.apply(oTarget, arguments);
+        }
+    }
+    /* TEST */
+    var a = bindThis(function (a, b) {
+        return this.test + a + b;
+    }, {test: 1})(2, 3);
+
+    console.log(a)
+</script>
+</body>
+</html>
