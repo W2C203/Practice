@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>修改this指向</title>
+</head>
+<body>
+<pre>
+      //简单情况
+//    function bindThis(f, obj) {//此函数返回一个函数调用
+//        return function() {
+//            //用obj对象调用f函数，obj只修改了this的指向，并未传递参数，f无需传入参数
+//            return f.apply(obj);//用call也行
+//        }
+//    }
+//    var num = bindThis(function () {
+//        return this.test;
+//    }, {test: 1})();
+//    console.log(num);//结果1
+    //复杂情况
+    function bindThis(f, obj) {//此函数返回一个函数调用
+        return function() {
+            //用obj对象调用f函数，obj只修改了this的指向，并未传递参数，f需传入参数,由arguments传入
+            return f.apply(obj, arguments);//用call：f.call(obj, arguments[0], arguments[1]);
+        }
+    }
+    var num = bindThis(function (a, b) {
+        return this.test + a + b;
+    }, {test: 1})(2,3);
+    console.log(num);//结果6
+
+</pre>
+<script>
+//    function bindThis(f, obj) {//此函数返回一个函数调用
+//        return function() {
+//            //用obj对象调用f函数，obj只修改了this的指向，并未传递参数，f无需传入参数
+//            return f.apply(obj);//用call也行
+//        }
+//    }
+//    var num = bindThis(function () {
+//        return this.test;
+//    }, {test: 1})();
+//    console.log(num);//结果1
+
+    function bindThis(f, obj) {//此函数返回一个函数调用
+        return function() {
+            //用obj对象调用f函数，obj只修改了this的指向，并未传递参数，f需传入参数,由arguments传入
+            return f.apply(obj, arguments);//用call：f.call(obj, arguments[0], arguments[1]);
+        }
+    }
+    var num = bindThis(function (a, b) {
+        return this.test + a + b;
+    }, {test: 1})(2,3);
+    console.log(num);//结果6
+
+</script>
+</body>
+</html>

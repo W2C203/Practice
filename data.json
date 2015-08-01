@@ -104,6 +104,14 @@
         "输出栗子：6"
       ],
       "date": "0731"
+    },
+    {
+      "question_title": "2015-08-01[获取字符串的长度]",
+      "question_explain": ["要求构造一个strLength(s, bUnicode255For1)方法，如果第二个参数 bUnicode255For1 === true，则所有字符长度为1，否则如果字符Unicode编码>255则长度为2。",
+        "输入栗子: strLength('hello world, 你好世界', false)",
+        "输出栗子: 21"
+      ],
+      "date": "0801"
     }
   ],
   "person": {
