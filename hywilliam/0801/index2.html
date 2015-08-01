@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+</head>
+<body>
+<canvas height="600" width="800" id="canvas"></canvas>
+<script>
+    /**
+     * 画布中的点,x,y是坐标点，坐标系为左上角为原点
+     */
+    function Point(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    /**
+     *
+     * @param p1
+     * @param p2
+     * @constructor
+     * 根据勾股定理计算两点之间的直线距离
+     */
+    function Line(p1, p2) {
+        this.p1 = p1;
+        this.p2 = p2;
+        this.length = Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
+    }
+
+    /**
+     * 图形构造器
+     * @constructor
+     */
+    function Shape() {
+        this.points = [];
+        this.lines = [];
+        this.init();
+    }
+
+    Shape.prototype = {
+        constructor : Shape,
+        // 初始化，获取当前画布上下文环境
+        init        : function () {
+            if (this.context === undefined) {
+                var canvas = document.getElementById('canvas');
+                Shape.prototype.context = canvas.getContext('2d');
+            }
+        },
+        // 绘制图形的关键方法，通过循环查找关键点
+        draw        : function () {
+            var i, ctx = this.context;
+            ctx.strokeStyle = this.getColor();
+            ctx.beginPath();
+            ctx.moveTo(this.points[0].x, this.points[0].y);
+            for (i = 1; i < this.points.length; i++) {
+                ctx.lineTo(this.points[i].x, this.points[i].y);
+            }
+            ctx.closePath();
+            ctx.stroke();
+        },
+        // 生成一个随机rgb颜色
+        getColor    : function () {
+            var i, rgb = [];
+            for (i = 0; i < 3; i++) {
+                rgb[i] = Math.round(255 * Math.random());
+            }
+            return 'rgb(' + rgb.join(',') + ')';
+        },
+        // 遍历各个点，创建线条
+        getLines    : function () {
+            if (this.lines.length > 0) {
+                return this.lines;
+            }
+            var i, lines = [];
+            for (i = 0; i < this.points.length; ++i) {
+                lines[i] = new Line(this.points[i], this.points[i + 1] || this.points[0]);
+            }
+            this.lines = lines;
+            return lines;
+        },
+        // 面积计算，由子类各自实现
+        getArea     : function () {
+        },
+        // 周长计算
+        getPerimeter: function () {
+            var i, perim = 0, lines = this.getLines();
+            for (i = 0; i < lines.length; ++i) {
+                perim += lines[i].length;
+            }
+            return perim;
+        }
+    };
+
+    /**
+     * 三角形子类构造器
+     * @param a {Point}
+     * @param b {Point}
+     * @param c {Point}
+     * @constructor
+     */
+    function Triangle(a, b, c) {
+        this.points = [a, b, c];
+        // 三角形面积计算 Area = s(s-a)(s-b)(s-c), s为半周长
+        this.getArea = function () {
+            var p = this.getPerimeter(),
+                s = p / 2;
+            return Math.sqrt(s *
+            (s - this.lines[0].length) *
+            (s - this.lines[1].length) *
+            (s - this.lines[2].length));
+        }
+    }
+
+    /**
+     * 矩形子类构造器
+     * @param p {Point}
+     * @param side_a    width
+     * @param side_b    height
+     * @constructor
+     */
+    function Rectangle(p, side_a, side_b) {
+        this.points = [
+            p,  //左上角
+            new Point(p.x + side_a, p.y), // 右上角
+            new Point(p.x + side_a, p.y + side_b), // 右下角
+            new Point(p.x, p.y + side_b) //左下角
+        ];
+        // 矩形面积计算：长*宽
+        this.getArea = function () {
+            return side_a * side_b;
+        }
+    }
+
+    /**
+     * 正方形子类构造器
+     * @param p {Point}
+     * @param side
+     * @constructor
+     */
+    function Square(p, side) {
+        Rectangle.call(this, p, side, side);
+    }
+
+    /**
+     * 继承关系处理
+     */
+    (function () {
+        var s = new Shape();
+        Triangle.prototype = s;
+        Rectangle.prototype = s;
+        Square.prototype = s;
+    })();
+
+    /* TEST */
+    var p1 = new Point(100, 100);
+    var p2 = new Point(300, 100);
+    var p3 = new Point(200, 0);
+
+    //三角形实例~(屋顶)
+    var t = new Triangle(p1, p2, p3);
+
+    t.draw();
+
+    //矩形实例化~（门）
+    var r = new Rectangle(new Point(200, 200), 50, 100);
+    r.draw();
+
+    //正方形实例化~(窗户)
+    var s = new Square(new Point(130, 130), 50);
+    s.draw();
+
+    //(屋子)
+    new Square(p1, 200).draw();
+</script>
+</body>
+</html>
