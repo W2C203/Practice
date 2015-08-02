@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <style>
+        table, tr, th, td {
+            border: solid 1px;
+        }
+
+        table thead {
+            line-height: 2em;
+            background-color: #557398;
+        }
+
+        table td {
+            text-align: center;
+            width: 10em;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>姓名</th>
+        <th>力量</th>
+        <th>敏捷</th>
+        <th>智力</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>德鲁伊</td>
+        <td>17</td>
+        <td>24</td>
+        <td>13</td>
+    </tr>
+    <tr>
+        <td>月之骑士</td>
+        <td>15</td>
+        <td>22</td>
+        <td>16</td>
+    </tr>
+    <tr>
+        <td>众神之王</td>
+        <td>19</td>
+        <td>15</td>
+        <td>20</td>
+    </tr>
+    <tr>
+        <td>流浪剑客</td>
+        <td>23</td>
+        <td>15</td>
+        <td>14</td>
+    </tr>
+    </tbody>
+</table>
+<script>
+    var table = document.getElementsByTagName('table')[0];
+    var ctrls = document.getElementsByTagName('th');// 表头为控制排序的按键
+    var tBody = document.getElementsByTagName('tbody')[0];
+    var hero = tBody.getElementsByTagName('tr');// tbody中每一行是一个英雄
+
+    var data = (function () {// 将每一行数据抽出来操作，类型为对象
+        var re = [];//结果数组
+        var i, j, val, role;
+        for (i = 0; i < hero.length; ++i) {
+            val = hero[i].getElementsByTagName('td');//每个英雄的属性数组
+            role = {};//每个英雄
+            for (j = 0; j < val.length; ++j) {
+                role[j] = val[j].innerHTML;
+            }
+            re.push(role);
+        }
+        return re;
+    })();
+    /**
+     * 升序
+     */
+    function ascSort(data, tag) {//若是中文则按照unicode编码进行排序
+        if (tag === 0) {
+            data.sort(function (a, b) {
+                return a[tag].charCodeAt(0) - b[tag].charCodeAt(0);
+            });
+        } else {
+            data.sort(function (a, b) {
+                return parseInt(a[tag]) - parseInt(b[tag]);
+            })
+        }
+        return data;
+    }
+    /**
+     * 降序
+     */
+    function desSort(data, tag) {
+        if (tag === 0) {
+            data.sort(function (a, b) {
+                return b[tag].charCodeAt(0) - a[tag].charCodeAt(0);
+            });
+        } else {
+            data.sort(function (a, b) {
+                return parseInt(b[tag]) - parseInt(a[tag]);
+            })
+        }
+        return data;
+    }
+    /**
+     * 页面更新
+     * @param data
+     */
+    function renderHero(data) {
+        var tBody = document.getElementsByTagName('tbody')[0];//每次调用都要重新获取tbody
+        var f = document.createElement('tbody');
+        for (var i = 0; i < data.length; ++i) {//数据转为DOM节点
+            var hero = document.createElement('tr');
+            for (var j in data[i]) {
+                var attr = document.createElement('td');
+                attr.innerHTML = data[i][j];
+                hero.appendChild(attr);
+            }
+            f.appendChild(hero);
+        }
+        table.replaceChild(f, tBody);
+    }
+    /**
+     * 处理主程
+     */
+    function handle() {
+        var i;
+        for (i = 0; i < ctrls.length; ++i) {
+            ctrls[i].count = 0;//标识位来判断当前属性该升序还是降序
+            ctrls[i].onclick = (function (i) {
+                return function () {//count===0降序，count===1升序
+                    var count = ctrls[i].count;
+                    if (count) {
+                        renderHero(ascSort(data, i));
+                        --count;
+                    } else {
+                        renderHero(desSort(data, i));
+                        ++count;
+                    }
+                    ctrls[i].count = count;
+                }
+            })(i)
+        }
+    }
+    handle();
+</script>
+</body>
+</html>
