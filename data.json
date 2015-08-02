@@ -115,14 +115,14 @@
       "date": "0801"
     },
     {
-      "question_title": "2015-08-02[表格信息排序]</h1>",
+      "question_title": "2015-08-02[表格信息排序]",
       "question_explain": [
         "如下图，请实现表格信息的排序功能，当点击表头的属性区域，将表格信息进行排序切换功能，即第一次点击为降序排序，再一次点击进行升序排序。"
       ],
       "example_picture": [
         "http://7xkex2.com1.z0.glb.clouddn.com/2015-08-02.png"
       ],
-      "date": "0716"
+      "date": "0802"
     }
   ],
   "person": {
