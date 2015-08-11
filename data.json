@@ -93,7 +93,9 @@
     },
     {
       "question_title": "2015-07-30[DOM节点查找]",
-      "question_explain": ["查找两个节点的最近的一个共同父节点，可以包括节点自身。oNode1和oNode2在同一个文档中，且不会为相同的节点。（发散：若是给出任意个节点让求最近公共父节点呢？）"],
+      "question_explain": [
+        "查找两个节点的最近的一个共同父节点，可以包括节点自身。oNode1和oNode2在同一个文档中，且不会为相同的节点。（发散：若是给出任意个节点让求最近公共父节点呢？）"
+      ],
       "date": "0730"
     },
     {
@@ -123,6 +125,16 @@
         "http://7xkex2.com1.z0.glb.clouddn.com/2015-08-02.png"
       ],
       "date": "0802"
+    },
+    {
+      "question_title": "2015-08-11[强迫症头像]",
+      "question_explain": [
+        "如下图，将你的QQ or 微信头像右上角加上红色的数字，类似于微信未读信息数量那种提示效果"
+      ],
+      "example_picture": [
+        "http://7xkex2.com1.z0.glb.clouddn.com/2015-08-11强迫症头像.png"
+      ],
+      "date": "0811"
     }
   ],
   "person": {
