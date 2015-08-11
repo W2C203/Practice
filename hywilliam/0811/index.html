@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <style>
+    #avatar1 {
+      position: relative;
+      width: 200px;
+      height: 200px;
+    }
+
+    #msg {
+      position: absolute;
+      top: 0;
+      right: 0;
+      font-size: 50px;
+      color: #009867;
+    }
+
+    #avatar3 {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      background-image: url("http://7xkex2.com1.z0.glb.clouddn.com/2015-08-11avatar.jpg");
+    }
+
+    #avatar3:after {
+      content: '6';
+      position: absolute;
+      right: 0;
+      font-size: 50px;
+      color: #FFFF00;
+    }
+  </style>
+</head>
+<body>
+
+<p><a href="https://jsfiddle.net/hywilliam/kzsr3xcv/1/" target="_blank">代码戳我戳我</a></p>
+
+<p>First:</p>
+
+<div id="avatar1"><img src="http://7xkex2.com1.z0.glb.clouddn.com/2015-08-11avatar.jpg" alt="william"/><span
+  id="msg">6</span></div>
+
+<p>Second:</p>
+<canvas id="avatar2" width="200" height="200"></canvas>
+
+<p>Third:</p>
+
+<div id="avatar3"></div>
+
+<p>Four:?????</p>
+
+<script>
+  var ctx = document.getElementById('avatar2').getContext('2d');
+  var avatar = new Image();
+  avatar.src = 'http://7xkex2.com1.z0.glb.clouddn.com/2015-08-11avatar.jpg';
+
+  avatar.addEventListener('load', function () {
+
+    // 绘制背景头像
+    ctx.drawImage(avatar, 0, 0);
+
+    ctx.font = "50px sans-serif";
+    ctx.fillStyle = '#FF0000';
+    ctx.textAlign = 'right';
+
+    // canvas写字
+    ctx.fillText("6", 200, 50);
+  });
+</script>
+</body>
+</html>
