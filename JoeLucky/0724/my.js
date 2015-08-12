@@ -50,3 +50,21 @@ function checkScrollSlide(){
     var documentH=$(window).height();    //可视区高度
     return (lastBoxDis<scrollTop+documentH)?true:false;
 }
+
+
+//for (var i = 0; i < th.length; i++) {
+//    th[i].addEventListener('click', function () {
+//        var td = document.getElementsByTagName('td');
+//        console.log(td.length)
+//        var sortList = [];
+//        function (num) {
+//            return function () {
+//                for (var j = i; j < td.length; j += th.length) {
+//                    console.log("i:" + i + "  j:" + j)
+//                    sortList.push(td[j].innerHTML);
+//                }
+//            }
+//        }(i);
+//        console.log(sortList)
+//    })
+//}

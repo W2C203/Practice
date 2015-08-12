@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<table border="1" style="width:50%;height:50%;margin:20px;font-size:50px;text-align:left">
+    <thead style='background-color:#c8c8c8'>
+    <tr>
+        <th>姓名</th>
+        <th>力量</th>
+        <th>敏捷</th>
+        <th>智力</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>德鲁伊</td>
+        <td>17</td>
+        <td>24</td>
+        <td>13</td>
+    </tr>
+    <tr>
+        <td>月之骑士</td>
+        <td>15</td>
+        <td>22</td>
+        <td>16</td>
+    </tr>
+    <tr>
+        <td>众神之王</td>
+        <td>19</td>
+        <td>15</td>
+        <td>20</td>
+    </tr>
+    <tr>
+        <td>流浪剑客</td>
+        <td>23</td>
+        <td>15</td>
+        <td>14</td>
+    </tr>
+    </tbody>
+</table>
+<script>
+    var th = document.getElementsByTagName('th');
+    console.log(th.length)
+    for (var i = 0; i < th.length; i++) {
+        th[i].addEventListener('click', function () {
+            var td = document.getElementsByTagName('td');
+            console.log(td.length)
+            var sortList = [];
+
+            (function (num) {
+                var i= num;
+                for (var j = i; j < td.length; j += th.length) {
+                    console.log("i:" + i + "  j:" + j)
+                    sortList.push(td[j].innerHTML);
+                }
+            })(i);
+            console.log(sortList)
+        })
+    }
+
+</script>
+</body>
+</html>
