@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>表格排序</title>
+    <style>
+        table, tr, th, td {
+            border: solid 1px;
+        }
+
+        table thead {
+            line-height: 2em;
+            background-color: #557398;
+        }
+
+        table td {
+            text-align: center;
+            width: 10em;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>姓名</th>
+        <th>力量</th>
+        <th>敏捷</th>
+        <th>智力</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>德鲁伊</td>
+        <td>17</td>
+        <td>24</td>
+        <td>13</td>
+    </tr>
+    <tr>
+        <td>月之骑士</td>
+        <td>15</td>
+        <td>22</td>
+        <td>16</td>
+    </tr>
+    <tr>
+        <td>众神之王</td>
+        <td>19</td>
+        <td>15</td>
+        <td>20</td>
+    </tr>
+    <tr>
+        <td>流浪剑客</td>
+        <td>23</td>
+        <td>15</td>
+        <td>14</td>
+    </tr>
+    </tbody>
+</table>
+<script>
+    var th = document.getElementsByTagName("th");
+    var tr = document.getElementsByTagName("tr");
+    var arr = [];//存放表格数据,二维数组
+    /**
+     * 将数据从表格中取出来
+     */
+    (function () {
+        for(var i = 1; i < tr.length ; i++) {
+            var  td = tr[i].getElementsByTagName("td");
+            var tmp = [];
+            for(var j = 0; j < td.length; j++) {
+                tmp[j] = td[j].innerHTML;
+            }
+            arr.push(tmp);
+        }
+    })();
+    /**
+     * 对二维数组根据列号进行升序排序
+     * @param array 二维数组
+     * @param colNum    列号(姓名不排序)
+     * @returns {*}
+     */
+    function sortUp(array, colNum) {
+        if(colNum > 0) {
+            array.sort(function (a, b) {
+                return parseInt(a[colNum]) - parseInt(b[colNum]);
+            })
+        }
+        return array;
+    }
+    /**
+     * 对二维数组根据列号进行降序排序
+     * @param array 二维数组
+     * @param colNum    列号(姓名不排序)
+     * @returns {*}
+     */
+    function sortDown(array, colNum) {
+        if(colNum > 0) {
+            array.sort(function (a, b) {
+                return parseInt(b[colNum]) - parseInt(a[colNum]);
+            })
+        }
+        return array;
+    }
+    /**
+     * 根据排好序的数组对表格数据进行刷新
+     * @param array 已排序数组
+     */
+    function update(array) {
+        for(var i = 1; i < tr.length; i++) {
+            var  td = tr[i].getElementsByTagName("td");
+            for(var j = 0; j < td.length; j++) {
+                td[j].innerHTML = array[i-1][j];
+            }
+        }
+    }
+    /**
+     * 入口函数,监听点击了哪一列以及次数
+     */
+    (function () {
+        var i;
+        for(i = 0; i < th.length; i++) {
+            th[i].count = 0;
+            th[i].onclick = (function (i) {
+                return function() {
+                    if(th[i].count%2) {
+                        update(sortUp(arr, i));
+                        console.log(i+": ");
+                        console.log(arr);
+                    } else {
+                        update(sortDown(arr, i));
+                        console.log(i+": ");
+                        console.log(arr);
+                    }
+                    th[i].count++;
+                }
+            })(i);
+        }
+    })();
+</script>
+</body>
+</html>
