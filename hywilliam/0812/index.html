@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+</head>
+<body>
+<a href="http://jsfiddle.net/hywilliam/s3gjt8ye/" target="_blank">代码戳我戳我</a>
+<button id="create">生成随机码</button>
+<pre id="result"></pre>
+<script>
+  // 思路：随机生成一个大数基表
+  var base = {
+    0 : 0,
+    1 : 0,
+    2 : 0,
+    3 : 0,
+    16: 0,
+    17: 0,
+    18: 0,
+    19: 0
+  };
+
+  var mask = 19;
+  var count = 300;
+
+  // 增大操作范围，进一步减小重复的可能性
+  var a = new Array(count).join('?');
+  var res = [];
+
+  // 初始化base
+  (function () {
+    for (var i in base) {
+      // js能进行位操作的最大32位大整数
+      base[i] = parseInt(Math.random() * 0x7FFFFFFF, 10);
+    }
+  })(base);
+
+  // 得到一个与n关联的随机大整数，保证不重复性
+  function swap(n) {
+    // 查找标识位
+    var idx = n & mask;
+
+    // 基于标识位找到对应的base，异或n
+    var xor = base[idx] ^ n;
+
+    // 覆盖标志位
+    return ((xor | mask) ^ mask) | idx;
+  }
+
+  // 生成的随机码放入结果集
+  a.replace(/./g, function (foo, n) {
+    res[n] = swap(n).toString(36);
+  });
+
+  // 数组乱序
+  function shuffle(a) {
+    var len = a.length;
+    var i, temp;
+    while (len) {
+      i = Math.floor(Math.random * len--);
+      temp = a[len];
+      a[len] = a[i];
+      a[i] = temp;
+    }
+    return a;
+  }
+
+  var btn = document.getElementById('create');
+  var result = document.getElementById('result');
+
+  btn.addEventListener('click', function () {
+    // TODO: 随机在结果集中选一个append到res中
+    shuffle(res).forEach(function (item, index) {
+      // 要200个就好啦
+      if (index < 200) {
+        result.innerText += index + ':' + item + '\n';
+      }
+    });
+  });
+</script>
+</body>
+</html>
