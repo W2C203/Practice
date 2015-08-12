@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>未读消息</title>
+    <style>
+        /*HTML方式 begin*/
+        #div1{
+            position: relative;
+            height: 400px;
+            width: 400px;
+        }
+        #div1 img{
+            width: 100%;
+            height: 100%;
+        }
+        .newMsg{
+            position: absolute;
+            right: 3%;
+            top: 0;
+            color: red;
+            font-size: 50px;
+            font-weight: bold;
+        }
+        /*HTML方式 end*/
+        /*CSS方式 begin*/
+        #div2{
+            position: relative;
+            height: 400px;
+            width: 400px;
+            background: url("http://i2.tietuku.com/325951df39416942s.jpg");
+            background-size:400px 400px;
+        }
+        #div2::after{
+            content: "4";
+            color: red;
+            font-size: 50px;
+            font-weight: bold;
+            position: absolute;
+            right: 3%;
+            top: 0;
+        }
+        /*CSS方式 end*/
+    </style>
+</head>
+<body>
+<p>HTML方式:</p>
+<div id="div1">
+    <img src="http://i2.tietuku.com/325951df39416942s.jpg" alt="one">
+    <span class="newMsg">4</span>
+</div>
+
+<p>css方式:</p>
+<div id="div2"></div>
+
+<p>canvas标签:</p>
+<canvas id="myCanvas" width="400px" height="400px">your browser does not support the canvas tag </canvas>
+<script>
+    window.onload = (function () {
+        var canvas = document.getElementById('myCanvas');
+        var ctx = canvas.getContext('2d');
+        var myImg = document.getElementsByTagName("img")[0];
+        console.log(myImg);
+        ctx.drawImage(myImg, 0, 0, 400, 400);
+        ctx.fillStyle="red";//数字颜色
+        ctx.font="50px bold";//数字大小 粗细,需在填充前设置
+        ctx.fillText("4",360,50);//填充文字
+    });
+</script>
+</body>
+</html>
