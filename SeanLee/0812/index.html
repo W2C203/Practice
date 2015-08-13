@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>产生200个随机码</title>
+</head>
+<body>
+<pre>
+        方法1:使用md5加密获得等长的随机码
+        <input id="key" type="text" placeholder="input your key..."><button id="summit">提交</button>
+        产生结果见控制台
+    </pre>
+<script src="md5.js"></script>
+<script>
+    function setMyKey(key) {
+        return ""+key;
+    }
+    function myRand(range) {
+        return Math.round(Math.random() * range);
+    }
+    function mergeKey(rand,key) {
+        if(+rand % 2 == 1 || +rand % 5 == 0) {
+            return "" + rand + key;
+        }
+        return ""+key+rand;
+    }
+    var allHash = [];
+    function makeCode(name) {
+        var key = setMyKey(name);
+        var num = null;
+        var cpxKey = null;
+        var hash = null;
+        for(var i = 0; i < 200; i++) {
+            num = myRand(key.length*200);
+            cpxKey = mergeKey(num,key);
+            hash = hex_md5(cpxKey);
+            allHash.push(hash);
+        }
+    }
+    var btn = document.getElementById("summit");
+    btn.onclick = function () {
+        var val = document.getElementById("key").value;
+        makeCode(val);
+//            console.log(allHash.length + ": ");
+        console.log(allHash);
+    }
+</script>
+</body>
+</html>
