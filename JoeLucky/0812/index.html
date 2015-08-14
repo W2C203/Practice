@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<h3>运行结果（刷新再次运行）：</h3>
+
+<div id="here"></div>
+<br><br><br>
+<pre>
+
+</pre>
+</body>
+<script>
+    Math.floor(Math.random() * 100);
+    var range = [null, "4", "6", "7", "0", "2", "3", "5", "f", "g", "h", "a", "w", "b", "c", "8", "p", "d", "e", "1", "i", "j", "k", "l", "t", "q", "u", "m", "r", "x", "9", "y", "n", "o", "s", "v", "z"]
+    //随机范围 加大破解力度 顺序本身随机
+    var date = new Date();
+    var randSeed = date.getHours() + date.getMinutes() + date.getSeconds();  //随机种子
+    var result = '';
+    var pre = '';  //保证连续两位不相等
+    for (var count = 0; count < 200; count++) {
+        var index = randSeed * Math.floor(Math.random() * 100) % 50;
+        if (range[index] && range[index] != pre) {      //没定义的/和上一位相等 跳过
+            pre = range[index];
+            result += range[index];
+            count++;
+        }
+    }
+    document.getElementById('here').innerHTML = result;
+</script>
+</html>

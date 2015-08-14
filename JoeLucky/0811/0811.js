@@ -9,9 +9,9 @@ picture.addEventListener('load', function () {
     // 绘制图片
     canvas.drawImage(picture, 0, 0, 200, 228);
 
-    canvas.font = "38px sans-serif";
+    canvas.font = "38px sans-serif ";
     canvas.fillStyle = '#F00';
     canvas.textAlign = 'right';
-// canvas写字
+    // canvas写字
     canvas.fillText("8", 195, 38);
 })
