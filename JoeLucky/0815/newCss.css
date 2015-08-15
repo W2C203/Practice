@@ -1,0 +1,61 @@
+*{
+    height:100px;
+}
+.out-side {
+    padding: 0 190px;
+    overflow: hidden;
+}
+.main {
+    float: left;
+    width: 100%;
+    background-color: #F00;
+}
+
+.left {
+    float: left;
+    width: 190px;
+    margin-left: -100%;
+    position: relative;
+    right:190px;
+    background-color: #0F0;
+}
+
+.right {
+    float: left;
+    width: 190px;
+    margin-left: -190px;
+    position: relative;
+    left:190px;
+    background-color: #00F;
+}
+
+
+
+
+
+
+.main2 {
+    float: left;
+    width: 100%;
+    background-color: #F00;
+}
+
+.main-wrap {
+    margin: 0 190px;
+}
+
+.left2 {
+    float: left;
+    width: 190px;
+    margin-left: -100%;
+    background-color: #0F0;
+}
+
+.right2 {
+    float: left;
+    width: 190px;
+    margin-left: -190px;
+    background-color: #00F;
+}
+
+
