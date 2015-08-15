@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel='stylesheet' href="newCss.css">
+</head>
+<body>
+<div>
+    圣杯布局：(在最外层用padding往外挤 然后left right相对定位到正确位置)
+    <div class="out-side">
+        <div class="main">main</div>
+        <div class="left">left</div>
+        <div class="right">right</div>
+    </div>
+    (缩小页面可以看出圣杯布局的严重缺陷。加入body{min-width: 700px;}可“暴力”解决)
+    <br><br><br>
+    双飞翼布局：(main添加内层包裹 用margin往外挤)
+    <div class="main2">
+        <div class="main-wrap">main</div>
+    </div>
+    <div class="left2">left</div>
+    <div class="right2">right</div>
+</div>
+</body>
+</html>
