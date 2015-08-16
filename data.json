@@ -156,9 +156,9 @@
             "question_title": "2015-08-16[XMLHttpRequest理解]",
             "question_explain": [
                 "如题，了解是什么，怎样完整地执行一次GET请求、检查错误",
-                "已函数的方式区分书写get和post 如function(getPost,url,data,callback){...}"
+                "用函数的方式区分书写get和post 如function(getPost,url,data,callback){...}"
             ],
-            "date": "0815"
+            "date": "0816"
         }
     ],
     "person": {

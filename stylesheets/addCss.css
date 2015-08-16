@@ -1,0 +1,10 @@
+h3{
+    cursor: pointer;
+}
+h3:after{
+    content:"↓";
+    font-size: 30px;
+}
+.hide{
+    display: none;
+}
