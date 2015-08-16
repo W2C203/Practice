@@ -65,15 +65,15 @@
 </div>
 <script id="template1" type="text/x-handlebars-template">
     <article>
-        <h3>{{question_title}}</h3>
-        <content class="hide">
+        <h3 class="title1">{{question_title}}</h3>
+        <content class="myhide">
             {{#each question_explain}}
             <p>{{{this}}}</p>
             {{/each}}
             {{#each example_picture}}
             <img src={{this}} alt=""/>
             {{/each}}
-            <p>
+            <p class="kuo">
                 {{#each person}}
                 <button><a href="{{this}}/{{../date}}/index.html" target="_blank">{{this}}</a></button>
                 {{/each}}

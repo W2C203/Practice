@@ -1,10 +1,23 @@
-h3{
+.title1,.title2{
     cursor: pointer;
 }
-h3:after{
-    content:"↓";
-    font-size: 30px;
+.title1:after,.kuo:after{
+    content:" ╝";
+    font-size: 20px;
+    position: relative;
+    bottom:-20px;
 }
-.hide{
+.kuo:after{
+    content:" ╝";
+    bottom:-30px;
+}
+
+.title1:before,.title2:before{
+    content:"╔ ";
+    font-size: 20px;
+    position: relative;
+    top:-20px;
+}
+.myhide{
     display: none;
 }

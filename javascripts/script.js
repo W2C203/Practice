@@ -73,13 +73,22 @@ $.getJSON("data.json", function (data) {        // 注意再chrome浏览器中 �
     })
 });
 
-$('#fill_container').on('click','h3',function(){
-    if($(this).next().hasClass('hide')){
-        $(this).next().removeClass('hide');
-    }else{
-        $(this).next().addClass('hide');
+$('#fill_container').on('click', 'h3', function () {
+    var that = $(this);
+    var operator = $(this).next();
+    if (operator.hasClass('myhide')) {
+        operator.slideDown(function () {
+            that.removeClass('title1');
+            that.addClass('title2');
+            operator.removeClass('myhide');
+        });
+    } else {
+        operator.slideUp(function () {
+            that.removeClass('title2');
+            that.addClass('title1');
+            operator.addClass('myhide');
+        })
     }
 })
-
 
 
