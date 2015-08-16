@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <link rel="stylesheet" href="stylesheets/addCss.css">
     <script type="text/javascript" src="javascripts/jquery-2.1.1.js"></script>
     <script type="text/javascript" src="javascripts/handlebars-v3.0.3.js"></script>
 
@@ -37,8 +38,8 @@
                 <span class="blc"></span><span class="trc"></span>
             </div>
 
-            <article class="markdown-body" id="fill_here">
-
+            <article class="markdown-body" id="fill_container">
+                <a id="fill_here"></a>
             </article>
 
         </div>
@@ -63,18 +64,22 @@
     <p class="name"></p>
 </div>
 <script id="template1" type="text/x-handlebars-template">
-    <h3><a href="#{{date}}">{{question_title}}</a></h3>
-    {{#each question_explain}}
-    <p>{{{this}}}</p>
-    {{/each}}
-    {{#each example_picture}}
-    <img src={{this}} alt=""/>
-    {{/each}}
-    <p>
-        {{#each person}}
-        <button><a href="{{this}}/{{../date}}/index.html" target="_blank">{{this}}</a></button>
-        {{/each}}
-    </p>
+    <article>
+        <h3>{{question_title}}</h3>
+        <content class="hide">
+            {{#each question_explain}}
+            <p>{{{this}}}</p>
+            {{/each}}
+            {{#each example_picture}}
+            <img src={{this}} alt=""/>
+            {{/each}}
+            <p>
+                {{#each person}}
+                <button><a href="{{this}}/{{../date}}/index.html" target="_blank">{{this}}</a></button>
+                {{/each}}
+            </p>
+        </content>
+    </article>
 </script>
 
 <script type="text/javascript" src="javascripts/script.js"></script>
