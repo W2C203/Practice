@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>XMLHttpRequest</title>
+    <script src="../../lib/jquery.min.js"></script>
+</head>
+<body>
+to do the test, you have to run app.js in the current folder to start node.js Server<br>
+click to get/post (GET return +1) (POST return +2)<br>
+<input id="num">
+<button id="get">proto javascript get</button>
+<button id="post">proto javascript post</button>
+<button id="get2">jquery get</button>
+<button id="post2">jqery post</button>
+<br>
+<label id="fill"></label>
+<label>(show things return from the Server)</label><br>
+the main code:
+<pre>
+    //原生实现
+    var Ajax = new XMLHttpRequest();
+    ajax = function (getPost, url, data, callback) { //data是对象 如 {myArg: num}
+        data = changeFrom(data);
+        if (getPost == 'GET') {
+            url += '?' + data;
+        }
+        Ajax.open(getPost, url, true); //启动一个请求以备发送
+        Ajax.setRequestHeader("content-Type", "application/x-www-form-urlencoded; charset=gbk;");
+        Ajax.onreadystatechange = function () {// 异步时，每次readyState变化都会触发
+            if (Ajax.readyState == 4 && Ajax.status == 200) {
+                callback(Ajax.responseText);
+            }
+        }
+        if (getPost == 'GET') {
+            Ajax.send(null);
+        } else {
+            Ajax.send(data);
+        }
+    }
+    function changeFrom(obj) {//把obj {a:2,b:3}转换成 string a=2&b=3 格式
+        var str = '';
+        for (i in obj) {
+            if (obj.hasOwnProperty(i)) {
+                str += '&' + i + '=' + obj[i];
+            }
+        }
+        return str.substring(1);//第一个&去掉
+    }
+    var get = function (url, data, callback) {
+        ajax('GET', url, data, callback);
+    }
+    var post = function (url, data, callback) {
+        ajax('POST', url, data, callback);
+    }
+    ----------------------------------------------------------------------------------------------------------------------
+    //Jquery对比实现  同时为了测试后台的正确性
+    $('#get2').on('click', function () {
+        //jquery封装使 写法
+        //        $.get('http://localhost:3000/?myArg=3',function(data){
+        //            $('#fill').html(data);
+        //        })//与下面等价
+        $.get('http://localhost:3000/', {myArg: $('#num').val()}, function (data) {
+            $('#fill').html(data);
+        })
+    });
+    $('#post2').on('click', function () {
+        $.post('http://localhost:3000/', {myArg: $('#num').val()}, function (data) {
+            $('#fill').html(data);
+        })
+    });
+</pre>
+<script>
+    //原生实现
+    var Ajax = new XMLHttpRequest();
+    ajax = function (getPost, url, data, callback) { //data是对象 如 {myArg: num}
+        data = changeFrom(data);
+        if (getPost == 'GET') {
+            url += '?' + data;
+        }
+        Ajax.open(getPost, url, true); //启动一个请求以备发送
+        Ajax.setRequestHeader("content-Type", "application/x-www-form-urlencoded; charset=gbk;");
+        Ajax.onreadystatechange = function () {// 异步时，每次readyState变化都会触发
+            if (Ajax.readyState == 4 && Ajax.status == 200) {
+                callback(Ajax.responseText);
+            }
+        }
+        if (getPost == 'GET') {
+            Ajax.send(null);
+        } else {
+            Ajax.send(data);
+        }
+    }
+    function changeFrom(obj) {//把obj {a:2,b:3}转换成 string a=2&b=3 格式
+        var str = '';
+        for (i in obj) {
+            if (obj.hasOwnProperty(i)) {
+                str += '&' + i + '=' + obj[i];
+            }
+        }
+        return str.substring(1);//第一个&去掉
+    }
+    var get = function (url, data, callback) {
+        ajax('GET', url, data, callback);
+    }
+    var post = function (url, data, callback) {
+        ajax('POST', url, data, callback);
+    }
+    function doWhat(back) {
+        document.getElementById('fill').innerHTML = back;
+    }
+    document.getElementById('get').addEventListener('click', function () {
+        var num = document.getElementById('num').value;
+        get('http://localhost:3000', {myArg: num}, doWhat);
+    }, true);
+    document.getElementById('post').addEventListener('click', function () {
+        var num = document.getElementById('num').value;
+        post('http://localhost:3000', {myArg: num}, doWhat);
+    }, true);
+
+
+    //Jquery对比实现  同时为了测试后台的正确性
+    $('#get2').on('click', function () {
+        //jquery封装使 写法
+        //        $.get('http://localhost:3000/?myArg=3',function(data){
+        //            $('#fill').html(data);
+        //        })//与下面等价
+        $.get('http://localhost:3000/', {myArg: $('#num').val()}, function (data) {
+            $('#fill').html(data);
+        })
+    });
+    $('#post2').on('click', function () {
+        $.post('http://localhost:3000/', {myArg: $('#num').val()}, function (data) {
+            $('#fill').html(data);
+        })
+    });
+
+</script>
+</body>
+</html>
