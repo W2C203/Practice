@@ -167,6 +167,22 @@
                 "建议后台采用nodejs http.Server （基于事件的 HTTP 服务器）实现"
             ],
             "date": "0816"
+        },
+        {
+            "question_title": "2015-08-24[JS实现单向链表]",
+            "question_explain": [
+                "JS是弱类型语言,并没有明确的指针概念,而单向链表数据结构经常使用指针进行遍历,",
+                "单向链表中结点中存在一个存放下一个结点的数据，只能单向进行遍历。",
+                "现使用JS实现简单的单向链表：",
+                "&nbsp;&nbsp;&nbsp;&nbsp;增加结点：list.addNode(data)",
+                "&nbsp;&nbsp;&nbsp;&nbsp;删除结点：list.delNode(node)",
+                "&nbsp;&nbsp;&nbsp;&nbsp;查询结点：list.getNode(nthNode)",
+                "&nbsp;&nbsp;&nbsp;&nbsp;修改结点：list.setNode(nthNode,data)",
+                "&nbsp;&nbsp;&nbsp;&nbsp;获取链表长度：list.length()",
+                "&nbsp;&nbsp;&nbsp;&nbsp;(选做)将链表逆序：list.reverse()",
+                "&nbsp;&nbsp;&nbsp;&nbsp;......"
+            ],
+            "date": "0824"
         }
     ],
     "person": {
