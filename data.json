@@ -183,6 +183,16 @@
                 "&nbsp;&nbsp;&nbsp;&nbsp;......"
             ],
             "date": "0824"
+        },
+        {
+            "question_title": "2015-09-04[nodeJs文件存储]",
+            "question_explain": [
+                "经常在页面中需要上传文件（文档、图片等）如何在后端实现文件存储",
+                "nodeJs实现，参考资料:<a href='http://blog.csdn.net/lfsfxy9/article/details/8870069'>node-formidable模块<a/>",
+                "注意说明清除，前端的HTML结构form、input，与后台的对应关系、必要性等",
+                "扩展：如何实现前端无刷新表单提交，参考资料:<a href='http://blog.csdn.net/zzq58157383/article/details/7718956'>jquery.form.js的ajaxSubmit</a>"
+            ],
+            "date": "0904"
         }
     ],
     "person": {
