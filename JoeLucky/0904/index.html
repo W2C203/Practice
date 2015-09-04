@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>nodeJs文件存储</title>
+</head>
+<body>
+<pre>
+    //DOM结构
+&nbsp;&nbsp;&lt;form id="file" action="http://IP地址/upload" method="post" enctype="multipart/form-data"&gt;
+&nbsp;&nbsp;    &lt;input name="upload1" type="file"&gt;
+&nbsp;&nbsp;    &lt;input name="upload2" type="file"&gt;
+&nbsp;&nbsp;    &lt;button id="upload"&gt;上传&lt;/button&gt;    &lt;!--这里用button 防止表单默认提交事件--&gt;
+&nbsp;&nbsp;&lt;/form&gt;
+
+&nbsp;&nbsp;//DOM结构说明：
+    form标签：action与后端req.url对应  method必须为post enctype必须为multipart/form-data
+    input标签：formidable.IncomingForm 的parse会对所提交 input标签含有name属性的进行操作（换言之，如果去除name属性 那么后端将无法获取改文件）
+    <br><br>
+    //前端表单无刷新提交代码 需引入jquery-form.js
+    $('#upload').on('click', function () {
+        $('#file').ajaxSubmit(function (text, status) {
+            if (status === 'success') {
+                console.log(text.toString());//这里就可以处理响应 而不会刷新页面
+            }
+        });
+    }
+    <br><br>
+    //后端代码：
+    var formidable = require('formidable'),
+            http = require('http'),
+            fs = require('fs');
+    http.createServer(function (req, res) {
+        res.setHeader("Access-Control-Allow-Origin", "*");//跨域
+        if (req.url == '/upload' && req.method.toLowerCase() == 'post') {
+            var form = new formidable.IncomingForm();
+            form.parse(req, function (error, fields, files) {
+                var date = new Date();
+                var ms = Date.parse(date);      //用于给保存的文件取名字
+                if (files.upload1) {            //为避免出错 先判断是否有该属性 以下类似
+                    var types1 = files.upload1.name.split('.');
+                    fs.renameSync(files.upload1.path, "./data/" + ms + '1.' + String(types1[types1.length - 1]));
+                    //                                 文件路径  文件名(区分两文件加个数字)   扩展名
+                }
+                if (files.upload2) {
+                    var types2 = files.upload2.name.split('.');
+                    fs.renameSync(files.upload2.path, "./data/" + ms + '2.' + String(types2[types2.length - 1]));
+                }
+                var resString = "";//把文件名处理成一个接近json结构的字符串 用于返回 这里策略因地制宜
+                if (files.upload1) {
+                    resString += '"1":"' + ms + '1.' + String(types1[types1.length - 1]) + '",';
+                }
+                if (files.upload2) {
+                    resString += '"2":"' + ms + '2.' + String(types2[types2.length - 1]) + '",';
+                }
+                res.writeHead(200, {'content-type': 'text/plain'});
+                res.end(resString);
+            });
+        }
+    }).listen(15000, function () {
+        console.log('Listening on 15000');
+    });
+</pre>
+</body>
+</html>
