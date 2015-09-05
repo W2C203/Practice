@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <!--<meta http-equiv="Access-Control-Allow-Origin" content="*">-->
+    <title>XMLHttpRequest理解</title>
+    <style>
+        textarea{
+            height: 250px;
+            width: 250px;
+            background-color: #fff;
+            border: 1px solid #000000;
+        }
+    </style>
+</head>
+<body>
+    <textarea id="area"></textarea>
+    <br>
+    <button id="get">get</button>
+    <button id="post">post</button>
+    <script src="xml.js"></script>
+    <pre>
+        主要代码:
+        function getXMLHttpRequest() {//创建XML请求
+            try {
+                try {
+                    return new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                catch (e) {
+                    return new ActiveXObject("Msxml2.XMLHTTP");
+                }
+            }
+            catch (e) {
+                return new XMLHttpRequest();
+            }
+        }
+        function XMLHttp(getPost, url, data, callback) {XMLHttp请求
+            var req = getXMLHttpRequest();
+            data = changeForm(data);
+            if (getPost.toUpperCase() == 'GET') {
+                url = url + '?' + data;
+            }
+            req.onreadystatechange = function () {
+                if (req.readyState == 4 && req.status == 200) {
+                    callback(req.responseText);
+                } else {
+                    console.log(req.readyState);
+                    console.log(req.status);
+                    console.log(req.statusText);
+                    console.log("something wrong");
+                }
+            };
+            req.open(getPost, url, true);
+            req.setRequestHeader("content-Type", "application/x-www-form-urlencoded; charset=gbk;");
+            if (getPost.toUpperCase() == 'GET') {
+                req.send(null);
+            } else if (getPost.toUpperCase() == 'POST') {
+                req.send(data);
+            }
+        }
+        function changeForm(data) {//对象转HTTP请求格式
+            var str = '';
+            for (var i in data) {
+                if (data.hasOwnProperty(i)) {
+                    str += '&' + i + '=' + data[i];
+                }
+            }
+            return str.substr(1);
+        }
+    </pre>
+</body>
+</html>
