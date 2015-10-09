@@ -12,6 +12,18 @@
     <li>44444444</li>
     <li>55555555</li>
 </ul>
+<pre>
+        (function () {
+        var list = document.getElementById("list").getElementsByTagName("li");
+        for (var i = 0; i < list.length; i++) {
+            list[i].addEventListener("click", function (x) {
+                return function () {
+                    alert(x + 1); //闭包  不会对最外层的i变量造成
+                }
+            }(i));
+        }
+    })();
+</pre>
 </body>
 <script>
 
