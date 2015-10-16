@@ -18,21 +18,16 @@
         ------------------------------------------------------------------------------------
         //the simple way
         function isArray(o) {
-            return Object.prototype.toString.call(o) === '[object Array]';
+            return Array.isArray(o);
         }
-        //the right way :Array.isArray()
+        //the right way
         function IsArray(obj) {
-            var flag = Array.isArray(obj) || function (obj) {
-                return Object.prototype.toString.call(obj) === '[object Array]';
-            }
+            return typeof obj === 'object' Object.prototype.toString.call(obj) === '[object Array]';
         }
     </pre>
     <script type="text/javascript">
         function IsArray(obj) {
-            var flag = Array.isArray(obj) || function (obj) {
-                return typeof obj ==='object' && Object.prototype.toString.call(obj) === '[object Array]';
-            }
-            return flag;
+            return typeof obj === 'object' && Object.prototype.toString.call(obj) === '[object Array]';
         }
         console.log(IsArray([1,2,3]));
     </script>
