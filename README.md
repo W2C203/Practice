@@ -37,6 +37,12 @@ EveryDay Coding Practice
 
 ***
 
+
+<script>alert('handsome body')</script>123123123
+<em>emself</em>123123123
+<em onclick="alert('suck')">fdfdf</em>123123
+
+
   [1]: file:///home/joe/myownpractice/data.json        
   [2]: file:///home/joe/myownpractice/index.html
 
